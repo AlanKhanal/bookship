@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
     <title>Delete Category</title>
+    <link rel="stylesheet" href="../private/management.css">
     <style>
         th,td{
             border:1px solid black;
             margin:0px 0px;
             padding:10px 20px;
         }
-        
     </style>
 </head>
 <body>
@@ -19,14 +19,13 @@
         <?php
         include '../private/dbconnect.php';
         
-        $sql = "SELECT * FROM categories WHERE cat_display=0 ORDER BY cat_date desc";
+        $sql = "SELECT * FROM categories WHERE cat_display=1 ORDER BY cat_date desc";
         $result = mysqli_query($conn, $sql);
-        if(isset($_GET['del'])){
-            $del_id=$_GET['del'];
-            $delete = "UPDATE categories SET `cat_display`='1' WHERE `cat_id`='$del_id'";
+        if(isset($_REQUEST['del'])){
+            $del_id=$_REQUEST['del'];
+            $delete = "DELETE FROM categories where cat_id='$del_id'";
             $sql = mysqli_query($conn,$delete);
             if($sql===true){
-                
                 header("location:dltcat.php");
             }
         }
@@ -58,7 +57,7 @@
                 }
             } 
             else {
-                echo "No data in table.";
+                echo "<div class=message>No data hidden yet.<br>First, hide the category from update category section.</div>";
             }
         ?>
         </div>

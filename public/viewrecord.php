@@ -46,7 +46,6 @@
                 $transName =$row['admin_transactionName'];
                 $transNumb = $row['admin_transactionNumber'];
                 $estd = $row['admin_estdDate'];
-                $delete='delete';
                     echo'<tr>
                         <td>'.$Id.'</td>
                         <td>'.$username.'</td>
