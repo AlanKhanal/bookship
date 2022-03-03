@@ -1,4 +1,7 @@
-<style>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
     .manage{
         font-size:30px;
         font-weight:bold;
@@ -18,19 +21,26 @@
         justify-content:space-around;
     }    
 </style>
-<hr>
-<div class="buttonsview">
+</head>
+<body>
     <div>
-        <a href="../public/addcat.php"><button>Add Categories</button><br></a>
-        <a href="../public/dltcat.php"><button>Delete Categories</button><br></a>
-        <a href="../public/editcat.php"><button>Update Categories</button><br></a>
-        <a href="../public/viewcat.php"><button>View Categories</button></a>
+        <div class="buttonsview">
+        <div>
+            <a href="../public/addcat.php"><button>Add Categories</button><br></a>
+            <a href="../public/dltcat.php"><button>Delete Categories</button><br></a>
+            <a href="../public/editcat.php"><button>Update Categories</button><br></a>
+            <a href="../public/viewcat.php"><button>View Categories</button></a>
+        </div>
+        <div>
+            
+            <a href="../public/addproduct.php"><button>Add Products</button><br></a>
+            <a href="../public/dltproduct.php"><button>Delete Products</button><br></a>
+            <a href="../public/editproduct.php"><button>Update Products</button><br></a>
+            <a href="../public/viewproduct.php"><button>View Products</button></a>
+        </div>
+        </div>
     </div>
-    <div>
-        
-        <a href="../public/addproduct.php"><button>Add Products</button><br></a>
-        <a href="../public/dltproduct.php"><button>Delete Products</button><br></a>
-        <a href="../public/editproduct.php"><button>Update Products</button><br></a>
-        <a href="../public/viewproduct.php"><button>View Products</button></a>
-    </div>
-</div>
+
+</body>
+</html>
+

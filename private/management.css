@@ -1,0 +1,16 @@
+.add,input{
+    text-align:center;
+    font-size:30px;
+    margin:10px;
+    border-radius:15px;
+}
+.error{
+    color:red;
+    text-align:center;
+    font-size:18px;
+}
+.message{
+    color:blue;
+    text-align:center;
+    font-size:18px;
+}

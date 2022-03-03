@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Document</title>
+    
     <style>
         
         th,td{
@@ -45,9 +45,8 @@
                 //$compDetails = trim($row['admin_companyDetails']);
                 $transName =$row['admin_transactionName'];
                 $transNumb = $row['admin_transactionNumber'];
-                
                 $estd = $row['admin_estdDate'];
-
+                $delete='delete';
                     echo'<tr>
                         <td>'.$Id.'</td>
                         <td>'.$username.'</td>

@@ -4,9 +4,7 @@
     
     <style>
         *{
-            font-family: "Goudy Bookletter 1911", sans-serif;;
-            
-            margin: 2px 3px;
+            font-family: "Goudy Bookletter 1911", sans-serif;
         }
         .nav{
             background:rgb(0, 64, 255);
@@ -14,14 +12,16 @@
             padding: 0.5% 1%;
             border-radius:5px;
             font-size:17px;
+            
         }
-        a{
+        .nav a{
             text-decoration:none;
             color: white;
             font-weight:bold;
+            margin-right:20px;
 
         }
-        a:hover{
+        .nav a:hover{
             color:black;
         }
     </style>

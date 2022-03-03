@@ -6,24 +6,7 @@
 <html>
 <head>
     <title>Add category</title>
-    <style>
-        .add,input{
-            text-align:center;
-            font-size:30px;
-            margin:10px;
-            border-radius:15px;
-        }
-        .error{
-            color:red;
-            text-align:center;
-            font-size:18px;
-        }
-        .message{
-            color:blue;
-            text-align:center;
-            font-size:18px;
-        }
-    </style>
+    <link rel="stylesheet" href="../private/management.css">
 </head>
 <body>
     <div class="add">
@@ -62,4 +45,3 @@
         } 
     }
 ?>
-<?php include '../private/management.php';?>
