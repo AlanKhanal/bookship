@@ -51,7 +51,7 @@
                         <td><?=$catname?></td>
                         <td><?=$products?></td>
                         <td><?=$date?></td>
-                        <td><a href="dltcat.php?del=<?=$Id?>">Delete</a></td>
+                        <td><<a href="">Unhide</a>> <<a href="dltcat.php?del=<?=$Id?>">Delete</a>></td>
                     </tr>
             <?php   
                 }
