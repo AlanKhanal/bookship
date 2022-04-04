@@ -1,5 +1,4 @@
 <?php
-
     $servername = 'localhost';
     $username = 'root';
     $password = '';
@@ -10,4 +9,4 @@
     if(!$conn){
         die('Not Connected'.mysqli_connect_error());
     }
-?>
+  ?>
