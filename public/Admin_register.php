@@ -17,7 +17,7 @@
         <form action="" method="POST">
 <!-- adminName -->
             <label for="">Admin Username:</label>
-            <input type="text" id="adminName" class="" name="adminName" placeholder="AtoZ0to9" required>
+            <input type="text" id="adminName" class="" name="adminName" required>
             <br>
 <!-- password -->
             <label for="">Password</label>
