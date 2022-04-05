@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
     $email=$_REQUEST['company-mail'];
     // adminName_validation
     $adminNamePattern="[^0-9A-Za-z]";
-    $adminNamePattern2="[^A-Za-z0-9]";//actual pattern 
+    $adminNamePattern2="[^/A-Za-z0-9]";//actual pattern 
     if($adminName==""){
         $msg.="Please insert Admin name.<br>";
         $valid=false;
@@ -36,6 +36,11 @@ if(isset($_POST['submit'])){
             $msg.="Admin name requires only A-Z,a-z or 0-9.<br>"; 
             $valid=false; 
     }
+    elseif($adminName==strpos(trim($adminName), ' ')){
+        $msg.="username can only be of one word."; 
+        $valid=false; 
+    }
+    
     // password validation
     if($password==""){
         $msg.="Please insert password.<br>";
