@@ -1,17 +1,23 @@
 <?php
     include ('../private/dbconnect.php');
+    include('../private/admin-header-nav.php');
     session_start();
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
     {
         header("location: Admin_login.php");
     }
     $admin = $_SESSION['adminName'];
-    $query = "SELECT `adminID` FROM admins WHERE adminName='$admin'";
+    $query = "SELECT * FROM admins WHERE adminName='$admin'";
     $run=mysqli_query($conn,$query);
     if (mysqli_num_rows($run) > 0){
         $row = mysqli_fetch_assoc($run);
         $adminID=$row['adminID'];
+        $adminName=$row['adminName'];
+        $adminEmail=$row['email'];
+        $companyName=$row['companyName'];
+        $companyAddress=$row['companyAddress'];
     }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,6 +25,12 @@
     <title>Admin Home | Bookship</title>
 </head>
 <body>
-    <a href="../private/Admin-logout.php">Logout</a>
+    <!-- <a href="../private/Admin-logout.php">Logout</a> -->
+    <div>
+        <div>Company Name:<?=$companyName?></div>
+        <div>Admin Name:<?=$adminName?></div>
+        <div>Location:<?=$companyAddress?></div>
+        <div>E-mail:<?=$adminEmail?></div>
+    </div>
 </body>
 </html>
