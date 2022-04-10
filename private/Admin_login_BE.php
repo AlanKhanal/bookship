@@ -31,30 +31,60 @@ if(isset($_POST['submit'])){
 
     if($valid){
         //check if user is registered
-        $adminCheck="SELECT * FROM admins WHERE `adminName`='$adminName' AND `password`='$password' AND `emailVerification`=1 AND `adminStatus`=1";
-        $check1 = mysqli_query($conn, $adminCheck);
-        $num1 = mysqli_num_rows($check1);
-        if($num1<1){
-            echo '<div class="error">Admin Name and Password not matched.</div>';
-            $valid=false;
-        }
-        elseif($num1==1){
-            session_start();
-            $_SESSION["adminName"] = $adminName;
-            $_SESSION["loggedin"] = true;
-            $query="SELECT `adminID` FROM admins where adminName='$adminName' AND `emailVerification`=1 AND `adminStatus`=1";
-            $run=mysqli_query($conn,$query);
-            if (mysqli_num_rows($run) > 0){
-                $row = mysqli_fetch_assoc($run);
-                $adminID=$row['adminID'];
+            // $_SESSION["adminName"] = $adminName;
+            // $_SESSION["loggedin"] = true;
+            // $_SESSION["adminID"]=$adminID;
+            // $adminID=$row['adminID'];
+            // $login=false;
+            $sql="SELECT * from admins WHERE adminName='$adminName' and `emailVerification`=1 and `adminStatus`=1";
+            $result=mysqli_query($conn,$sql);
+            $num=mysqli_num_rows($result);
+            if($num==1){
+                while($row=mysqli_fetch_assoc($result)){
+                    if(password_verify($password,$row['password'])){
+                        session_start();
+                        $_SESSION['loggedIn']=true;
+                        // $login=true;
+                        
+                        $_SESSION["adminName"] = $adminName;
+                        $_SESSION["loggedin"] = true;
+                        $_SESSION["adminID"]=$adminID;
+                        $adminID=$row['adminID'];
+                        header("location:../public/Admin_home.php");
+                    }    
+                }
             }
             else{
-                echo 'verify login in email.';
-            }
-            $_SESSION["adminID"]=$adminID;
-            // echo $id;
-            header("location:Admin_home.php");
+                echo 'error';
             }
     }
+    //     $adminCheck="SELECT * FROM admins WHERE `adminName`='$adminName' AND `password`='$password' AND `emailVerification`=1 AND `adminStatus`=1";
+    //     $check1 = mysqli_query($conn, $adminCheck);
+    //     $num1 = mysqli_num_rows($check1);
+    //     if($num1<1){
+    //         echo '<div class="error">Admin Name and Password not matched.</div>';
+    //         $valid=false;
+    //     }
+    //     elseif($num1==1){
+    //         session_start();
+            
+
+    //         $query="SELECT `adminID` FROM admins where adminName='$adminName' AND `emailVerification`=1 AND `adminStatus`=1 AN";
+    //         $run=mysqli_query($conn,$query);
+    //         $row = mysqli_fetch_assoc($run);
+    //         $adminID=$row['adminID'];
+    //         if(password_verify($password,$row['password'])){
+    //             if (mysqli_num_rows($run) > 0){
+                
+    //             $row = mysqli_fetch_assoc($run);
+    //         }
+    //         else{
+    //             echo 'verify login in email.';
+    //         }
+            
+    //         // echo $id;
+    //         header("location:Admin_home.php");
+    //         }
+    // }
 }
 ?>
