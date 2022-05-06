@@ -112,25 +112,16 @@ if(isset($_POST['submit'])){
             $msg.="Username already taken.<br>";
             $dbValid=false;                
         }
-        //check company name from database
-        $checkQuery3="SELECT * FROM `users` WHERE `companyName`='$companyName' AND `emailVerification`=1";
-        $run3 = mysqli_query($conn, $checkQuery3);
-        $number_of_users3 = mysqli_num_rows($run3);
-        if($number_of_users3==1){
-            //show error
-            $msg.="Company Name already taken.<br>";
-            $dbValid=false;                
-        }
         if($dbValid){
             // insert into dabase
 
-            $insertRegForm="INSERT INTO users(`userName`,`password`,`email`,`companyName`,`companyAddress`) VALUES('$userName','$password','$email','$companyName','$companyAddress')";
+            $insertRegForm="INSERT INTO users(`userName`,`password`,`email`) VALUES('$userName','$password','$email')";
             $run_insertRegForm=mysqli_query($conn,$insertRegForm);
             if($run_insertRegForm){
                     $to=$email;
                     $subject='E-mail Verification.';
                     $message="Click the link to confirm your book store registration into bookship.
-                            http://localhost:8081/bookship/private/mailVerification.php?user=$userName";
+                            http://localhost:8081/bookship/private/user-mailVerification.php?user=$userName";
                     $headers="From:less.secure.email.for.students@gmail.com";
                     // header("location:login.php");
                     $mail=mail($to,$subject,$message,$headers);

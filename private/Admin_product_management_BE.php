@@ -46,7 +46,7 @@ if(isset($_REQUEST['product-submit'])){
     }
     //productQty
     if($productQty==""){
-        $msg.="Enter product quantity.<br>";
+        $msg.="Enter book quantity.<br>";
         $valid=false;
     }
     elseif($productQty<1){
@@ -59,7 +59,7 @@ if(isset($_REQUEST['product-submit'])){
         $valid=false;
     }
     else if($productCost<0){
-        $msg.="Product cost cannot be negative.<br>";
+        $msg.="Book cost cannot be negative.<br>";
         $valid=false;
     }
     //productImg
@@ -75,9 +75,9 @@ if(isset($_REQUEST['product-submit'])){
             else{
                 if($check !== false) {
                     if (file_exists($bookImage)) {
-                        $msg.= "<br>Sorry, file already exists.<br>";
-                        $uploadOk = 0;
-                        $valid=false;
+                        // $msg.= "<br>Sorry, file already exists.<br>";
+                        // $uploadOk = 0;
+                        // $valid=false;
                     }
                     else{
                         $uploadOk = 1;
@@ -109,18 +109,16 @@ if(isset($_REQUEST['product-submit'])){
         }
         if($valid){
             //Check if the product is already in database
-            $uppperName=strtoupper($productName);
-            $upperAuthor=strtoupper($productAuthor);
-            $upperCategory=strtoupper($productCategory);
-            $checkProduct="SELECT upper(`adminID`,`productName`,`productAuthor`,`productCategory`) FROM products WHERE adminID=$adminID AND productName='$uppperName' AND productAuthor='$upperAuthor' AND productCategory='$upperCategory'";
-            $runcheck=mysqli_query($conn,$checkProduct);
-            if(mysqli_num_rows($runcheck)>0){
+            $checkProduct2="SELECT `adminID`,`productName`,`productAuthor`,`productCategory` FROM products WHERE adminID=$adminID AND productName='$productName' AND productAuthor='$productAuthor' AND productCategory='$productCategory'";
+            $runcheck2=mysqli_query($conn,$checkProduct2);
+            if(mysqli_num_rows($runcheck2)>0){
                 $msg.="Book already exists";
                 header('location:../private/Admin_product_edit.php');
                 $valid=false;
             }
             else{
-                $insertProduct="INSERT INTO products(`adminID`,`productName`,`productDesc`,`productCost`,`productQty`,`productPublished`,`productImg`,`productCategory`,`productAuthor`) VALUES($adminID,'$productName','$productDesc','$productCost',$productQty,'$productDate','$bookImage','$productCategory','$productAuthor')";
+                $insertProduct="INSERT INTO products(`adminID`,`productName`,`productDesc`,`productCost`,`productQty`,`productPublished`,`productImg`,`productCategory`,`productAuthor`) 
+                VALUES($adminID,'$productName','$productDesc','$productCost',$productQty,'$productDate','$bookImage','$productCategory','$productAuthor')";
                 $runInsert=mysqli_query($conn,$insertProduct);
             }
             

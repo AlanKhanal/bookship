@@ -1,23 +1,23 @@
 <?php
-    include '../private/selector.php';
-    include '../private/Admin_register_BE.php';
+    // include '../private/selector.php';
+    include '../private/User_register_BE.php';
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bookship | Admin Register</title>
+    <title>Bookship | user Register</title>
 </head>
 <body>
     <!-- Heading -->
-    <h3>Admin Register</h3>
+    <h3>User Register</h3>
     <!-- error-msg -->
     <div class="error"><?=$msg?></div>
     <!-- company-register-form -->
     <div class="" id="register-form">
         <form action="" method="POST">
-<!-- adminName -->
-            <label for="">Admin Username:</label>
-            <input type="text" id="adminName" class="" name="adminName" required>
+<!-- userName -->
+            <label for="">Username:</label>
+            <input type="text" id="userName" class="" name="userName" required>
             <br>
 <!-- password -->
             <label for="">Password</label>
@@ -27,27 +27,19 @@
             <label for="">Confirm Password</label>
             <input type="password" id="confirm-password" class="" name="confirm-password" required>
             <br>
-<!-- company-name -->
-            <label for="">Company Name</label>
-            <input type="text" id="company-name" class="" name="company-name" required>
-            <br>
-<!-- company-address -->
-            <label for="">Company Address</label>
-            <input type="text" id="company-address" class="" name="company-address" required>
-            <br>
-<!-- company-mail -->
-            <label for="">Company E-mail</label>
-            <input type="email" id="company-mail" class="" name="company-mail" required>
+<!-- usermail -->
+            <label for="">Mail</label>
+            <input type="email" id="user-mail" class="" name="user-mail" required>
             <br>
 <!-- submission -->
             <input type="submit" value="Register" id="submit" class="" name="submit" >
         </form>
 </div>
     <div>
-        <a href="Admin_login.php">Got an account? Login!</a>
+        <a href="user_login.php">Got an account? Login!</a>
     </div>
     <div style="margin-top:30%">
-        <a href="">AS user</a>
+        <a href="">AS admin</a>
     </div>
 </body>
 </html>

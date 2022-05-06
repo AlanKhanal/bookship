@@ -86,16 +86,16 @@ if(isset($_POST['submit'])){
         $searchQuery="SELECT * FROM admins WHERE adminID=$adminID";
         $runsearchQuery=mysqli_query($conn,$searchQuery);
         if(password_verify($password,$row['password'])){
-        if(mysqli_num_rows($runsearchQuery)==1){
-            $hashed = password_hash($password, PASSWORD_DEFAULT);
-            $update="UPDATE admins SET `password`='$hashed' WHERE adminID=$adminID";
-            $run2=mysqli_query($conn,$update);
-            if($run2){
-                header('location:../private/Admin-logout.php');
-            }
-            else{
-                echo 'Failed to change password. ;(<br>';
-            }
+            if(mysqli_num_rows($runsearchQuery)==1){
+                $hashed = password_hash($password, PASSWORD_DEFAULT);
+                $update="UPDATE admins SET `password`='$hashed' WHERE adminID=$adminID";
+                $run2=mysqli_query($conn,$update);
+                if($run2){
+                    header('location:../private/Admin-logout.php');
+                }
+                else{
+                    echo 'Failed to change password. ;(<br>';
+                }
         }
         else{
             echo 'Incorrect password. Forgot password?<br>';

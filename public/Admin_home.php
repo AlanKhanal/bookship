@@ -23,14 +23,23 @@
 <html>
 <head>
     <title>Admin Home | Bookship</title>
+    <style>
+        .info{
+            padding-left: 5rem;
+        }
+        div{
+            padding:20px;
+            font-size: 24px;
+        }
+    </style>
 </head>
 <body>
     <!-- <a href="../private/Admin-logout.php">Logout</a> -->
-    <div>
-        <div>Company Name:<?=$companyName?></div>
-        <div>Admin Name:<?=$adminName?></div>
-        <div>Location:<?=$companyAddress?></div>
-        <div>E-mail:<?=$adminEmail?></div>
+    <div class="info">
+        <div><b>Company Name:</b><?=$companyName?></div>
+        <div><b>Admin Name:</b><?=$adminName?></div>
+        <div><b>Location:</b><?=$companyAddress?></div>
+        <div><b>E-mail:</b><?=$adminEmail?></div>
     </div>
 </body>
 </html>

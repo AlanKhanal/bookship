@@ -55,7 +55,7 @@ if(isset($_POST['submit'])){
                 }
             }
             else{
-                echo 'error';
+                $msg.="Username and Password did not matched";
             }
     }
     //     $adminCheck="SELECT * FROM admins WHERE `adminName`='$adminName' AND `password`='$password' AND `emailVerification`=1 AND `adminStatus`=1";

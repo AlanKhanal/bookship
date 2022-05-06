@@ -6,7 +6,14 @@
         .admin-nav{
             display:flex;
             justify-content:end;
-        }   
+            border: 2px solid white; 
+            padding: 5px;
+            background-color: black;
+        }
+        .admin-nav a{
+            color: white;
+            text-decoration: none;
+        }
         .admin-nav-list{
             padding-right: 1rem;
         }

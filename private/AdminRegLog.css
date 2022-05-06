@@ -1,0 +1,143 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+    background: radial-gradient(#fff, rgb(135, 177, 255));
+}
+.login-container{
+    width: 100%;
+    padding: 12px;
+    /* height: 682px; */
+}
+
+.login-text{
+    text-align: center;
+    width: 100%;
+    padding:12px;
+}
+
+.login-sidetext{
+    padding-top: 60px;
+    font-size: 30px;
+}
+
+.login-form{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 16px;
+    margin-left: 36%;
+    width: 28%;
+    height: 400px;
+    padding: 30px;
+    border: 1px solid black;
+    border-radius: 22px;
+    box-shadow: 0 70px 60px -50px rgb(90,88,88);
+}
+
+.input-class{
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    font-size: 24px;
+    padding: 8px 14px;
+}
+
+.loginbtn{
+    margin-top: 15px;
+    width: 35%;
+    border-radius: 15px;
+    padding: 12px 14px;
+    font-size: 18px;
+    background-color: rgb(33, 250, 221);
+    cursor: pointer;
+}
+
+.smalltext{
+    font-size: 18px;
+}
+
+
+.loginSignup{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.login-signup{
+    color: blue;
+}
+.msg{
+    font-size: 18px;
+    font-style: italic;
+}
+/* -------------------REGISTER-------------------------- */
+.signup-container{
+    width: 100%;
+    margin-bottom: 50px;
+    padding: 0 0 24px 0;
+    /* height: 682px; */
+    /* background: radial-gradient(white, cornflowerblue);
+    border: 1px solid black;
+    display: flex; */
+}
+
+.signup-text{
+    text-align: center;
+    width: 100%;
+    padding: 6px;
+    /* border: 1px solid black; */
+}
+
+.signup-sidetext{
+    padding-top: 12px;
+    font-size: 30px;
+}
+
+.signup-form{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 6px;
+    margin-left: 36%;
+    width: 28%;
+    padding: 12px 20px;
+    border: 1px solid black;
+    border-radius: 22px;
+    box-shadow: 0 70px 60px -50px rgb(90,88,88);
+}
+
+.signupbtn{
+    margin-top: 15px;
+    width: 35%;
+    border-radius: 15px;
+    padding: 12px 14px;
+    font-size: 18px;
+    background-color: rgb(33, 250, 221);
+}
+
+.smalltext{
+    font-size: 18px;
+    padding: 8px;
+}
+
+
+.loginSignup{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.error{
+    color: red;
+    margin-bottom: 8px;
+}
+
+.text-light{
+    text-decoration: none;
+}
+/* -----------------------------------------------------CATEGORY--------------------------------------- */
+.container{
+    text-align: center;
+}

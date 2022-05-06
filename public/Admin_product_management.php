@@ -42,83 +42,132 @@ include '../private/Admin_product_management_BE.php';
 <html>
 <head>
     <title>Product Management</title>
-    <!-- <style>
-        .body-separation{
-            display: flex;
-            justify-content: space-around;
-            margin:0px 5px;
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../private/AdminRegLog.css">
+    <style>
+        label{
+            font-weight: bold;
         }
-    </style> -->
+        label,input,textarea{
+            font-size: 14px;
+        }
+        input,textarea{
+            border:2px solid black;
+            margin-bottom: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        td a{
+            text-decoration: none;
+            color:white;
+        }
+        td a:hover{
+            color:gray;
+        }
+        td textarea{
+            border: 1px solid white;
+            background-color:beige;
+            color:gray;
+        }
+        .container{
+            text-align: start;
+        }
+    </style>
 </head>
 <body>
-    <div class="body-separation">
+     <div class="container">
+         <h2>ADD BOOK</h2>
         <div><?=$msg?></div>
-        <div>
+        <div class="add">
             <form action="" method="POST" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td><label for="">Book Name:</label></td>
+                    <td><input type="text" id="" class="" name="productName"></td>
+                </tr>
+                <tr>
+                    <td><label for="">Book Category:</label></td>
+                    <td><?php 
+                        echo '<select name="productCategory">';
+                            $query="SELECT `categoryName` FROM categories where categoryStatus=1 ORDER BY categoryName asc";
+                            echo '<option>Select Category</option>';
+                            if($run=mysqli_query($conn,$query)){
+                            if(mysqli_num_rows($run)>0){
+                                while($row=mysqli_fetch_array($run)){
+                                    echo '<option>'.$row['categoryName'].'</option>';//category options 
+                                }
+                            }
+                        }     
+                        echo '</select>';  //Selection closed       
+                        ?></td>
+                </tr>
+                <!-- SELECT CATEGORY INPUT -->
 
-            <label for="">Book Name:</label>
-            <input type="text" id="" class="" name="productName"><br>
+               <tr>
+                   <td> <label for="productDesc">Book Description:</label></td>
+                   <td><textarea type="text" rows=5 cols=50 id="productDesc" maxlength="1000" class="" name="productDesc" style="border:2px solid black;background:white"></textarea></td>
+               </tr>
+               <tr>
+                    <td><label for="productAuthor">Author Name:</label></td>
+                    <td><input type="text" id="productAuthor" class="" name="productAuthor" ><br></td>
+               </tr>         
 
-            <label for="">Book Category:</label><br>
-            <!-- SELECT CATEGORY INPUT -->
-            <?php 
-            echo '<select name="productCategory">';
-                $query="SELECT `categoryName` FROM categories where categoryStatus=1 ORDER BY categoryName asc";
-                echo '<option>Select Category</option>';
-                if($run=mysqli_query($conn,$query)){
-                if(mysqli_num_rows($run)>0){
-                    while($row=mysqli_fetch_array($run)){
-                        echo '<option>'.$row['categoryName'].'</option>';//category options 
-                    }
-                }
-            }     
-            echo '</select>';  //Selection closed       
-            ?><br>
+                <tr>
+                    <td><label for="productCost">Book Cost:</label></td>
+                    <td><input type="number" id="productCost" class="" name="productCost" min=1 value=1><br></td>
+                </tr>
 
-            <label for="productDesc">Book Description:</label><br>
-            <textarea type="text" rows=8 cols=50 id="productDesc" maxlength="1000" class="" name="productDesc"></textarea><br>
+                <tr>
+                    <td><label for="productImg">Book Image:</label></td>
+                    <td><input type="file" id="productImg" class="" name="productImg" accept="image/*" style="border:none"></td>
+                </tr>
+                    
+                <tr>
+                    <td><label for="productQty">Quantity:</label></td>
+                    <td><input type="number" id="productQty" class="" name="productQty" min=1 value=1 ></td>
+                </tr>
 
-            <label for="productAuthor">Author Name:</label><br>
-            <input type="text" id="productAuthor" class="" name="productAuthor" ><br>
-
-            <label for="productCost">Book Cost:</label><br>
-            <input type="number" id="productCost" class="" name="productCost" min=1 value=1><br>
-
-            <label for="productImg">Book Image:</label>
-            <input type="file" id="productImg" class="" name="productImg" accept="image/*"><br>
-                
-            <label for="productQty">Quantity:</label><br>
-            <input type="number" id="productQty" class="" name="productQty" min=1 value=1 ><br>
-
-            <label for="pubDate">Published Date</label><br>
-            <input type="date" id="pubDate" class="" name="productPublished"><br>
-                
-            <input type="submit" name="product-submit">  
-                
+                <tr>
+                <td><label for="pubDate">Published Date</label></td>
+                <td><input type="date" id="pubDate" class="" name="productPublished"></td>
+                </tr>
+                    
+                <td><input type="submit" name="product-submit"> </td> 
+            </table> 
             </form>
         </div>
         <hr>
         <!-- ********************************************DIVISION********************************************* -->
+        <div style="display:flex;justify-content:space-between">
+            <div><h2 align=center>BOOK</h2></div>
+            <div>
+                <form action="" method="POST">
+                    <input type="search" name="search">
+                    <input type="submit" name="search" value="SEARCH">
+                </form>
+            </div>
+        </div>
         <div><?=$tablemsg?></div>
         <div>
-            <table>
+            <table class="table table-striped" border=2px solid red>
                 <thead>
-                    <tr>
-                        <th>Book Name</th>
-                        <th>Book category</th>
-                        <th>Book Description</th>
-                        <th>Author Name</th>
-                        <th>Book Cost</th>
-                        <th>Book Image</th>
-                        <th>Product Quantity</th>
-                        <th>Published Date</th>
-                        <th>Management</th>
-                    </tr>
+                    <tr class="table-head" width=100% style="background:red;color:white;">
+                        <th width=10% scope="col" style="border-right:1px solid black;">Name</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Category</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Description</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Cost</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Image</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Quantity</th>
+                        <th width=15% scope="col" style="border-right:1px solid black;">Published On</th>
+                        <th width=15% scope="col" style="border-right:1px solid black;">Management</th>
+                  </tr>
                 </thead>
+
+
                 <tbody>
                     <tr>
                     <?php
-                        $queryTable="SELECT * FROM products WHERE adminID=$adminID and productStatus=1 GROUP BY productPublished desc";
+                        $queryTable="SELECT * FROM products WHERE adminID=$adminID and productStatus=1 ORDER BY productPublished desc";
                         $runTable=mysqli_query($conn,$queryTable);
                         while ($row = mysqli_fetch_array($runTable)){
                             $ID=$row['productID'];
@@ -131,21 +180,26 @@ include '../private/Admin_product_management_BE.php';
                             $productAuthor=$row['productAuthor'];
                             $published=$row['productPublished'];
                     ?>
+
+
                     <tr>
+                        <!-- <th scope="row"></th> -->
                         <td><b><?=$productName?></b><br><br><div align=left><i>By <?=$productAuthor?></i><div></td>
                         <td><?=$productCat?></td>
-                        <td><?=$productDesc?></td>
-                        <td><?=$productAuthor?></td>
-                        <td><?=$productQty?></td>
+                        <td><textarea name="" id="" cols="20" rows="2"><?=$productDesc?></textarea></td>
                         
+                        <td>Rs.<?=$productCost?></td>
                         <td><a href='<?=$productImg?>' target="_blank"><img src='<?=$productImg?>'height='90px' width='70px'></a></td>
-                        <td><?=$productCost?></td>
+                        <td><?=$productQty?></td>
                         <td><?=$published?></td>
-                        <td><a href='http://localhost:8081/bookship/private/Admin_product_edit.php?productID=<?=$ID?>'>[EDIT]</a> <a href='http://localhost:8081/bookship/private/Admin_product_delete.php?deleteID=<?=$ID?>'>[HIDE]</a></td>
+                        <td>
+                            <button class="btn btn-primary"><a href="http://localhost:8081/bookship/private/Admin_product_edit.php?productID=<?=$ID?>" class="text-light">EDIT</a></button>
+                            <button class="btn btn-danger"><a href="http://localhost:8081/bookship/private/Admin_product_delete.php?deleteID=<?=$ID?>" class="text-light">HIDE</a></button>
+                        </td>
                     </tr>
-                    <?php
+                    <!-- <?php
                             } 
-                    ?>
+                    ?> -->
                 </tbody>
             </table>
         </div>
