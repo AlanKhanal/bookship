@@ -161,7 +161,7 @@
                                     <div class="price">NPR.<?=$productCost?></div>
                                     <div class="cart">
                                         <a href="cart.php?id=<?=$ID?>">
-                                            <button>Add to cart</button>
+                                            <button onclick=carted()>Add to cart</button>
                                         </a>
                                     </div>
                                 </div>
@@ -186,12 +186,11 @@
         function carted(){
             $(document).ready(()=>{
                                 $.ajax({
-                                    url : 'http://localhost:8081/bookship/public/cart.php',
+                                    url : "http://localhost:8081/bookship/public/cart.php?id=<?=$ID?>",
                                     type: 'POST',
                                     data: $('#from-submit').serialize(),
                                     success : (data) =>{
                                         // console.log(data);
-                                        alert("hello");
                                     }
                                 });
                                 // toggle();

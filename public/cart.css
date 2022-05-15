@@ -1,0 +1,28 @@
+*{
+    padding:0px;
+    margin:0px;
+}
+.qty{
+    padding:5px;
+}
+.allBody{
+    margin:2% 5%;
+    display: flex;
+    justify-content: space-around;
+}
+.mid-div{
+    padding:5px;
+}
+.cartDown{
+    display:flex;
+}
+.cartDown li{
+    background-color: wheat;
+    padding: 3px 10px;
+}
+.cartDown li a{
+    text-decoration: none;
+}
+#popUp{
+    border:2px solid black;
+}
