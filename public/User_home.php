@@ -24,65 +24,56 @@
     <link rel="stylesheet" href="../private/userhome.css">
 </head>
 <body>
-    <div class="nav-bar">Nav Bar</div>
+    <?php
+    include("../private/User_nav.php");
+    ?>
     <div id="message"></div>
     <div class="shelf">   
-            <?php
-                $getQuery="SELECT * FROM products WHERE productStatus=1 ORDER BY productPublished desc LIMIT 5";
-                $runGet=mysqli_query($conn,$getQuery);
-                $numData=mysqli_num_rows($runGet)>0;
+    <div class="homecat">
+            <div>Collection</div>
+            <div class="view">VIEW ALL</div>
+        </div>
+        <div class="productsHome">  
+    <?php
+        $getQuery="SELECT * FROM products WHERE productStatus=1 ORDER BY productPublished desc LIMIT 5";
+        $runGet=mysqli_query($conn,$getQuery);
+        $numData=mysqli_num_rows($runGet)>0;
 
-                if($numData){
-                    ?><div>
-                        <div class="homecat">
-                            <div>Collection</div>
-                            <div class="view">VIEW ALL</div>
-                        </div>
+        if($numData){
+            while ($getRow = mysqli_fetch_array($runGet)){
+                $ID=$getRow['productID'];
+                $productName=$getRow['productName'];
+                $productDesc=$getRow['productDesc'];
+                $productCat=$getRow['productCategory'];
+                $productCost=$getRow['productCost'];
+                $productQty=$getRow['productQty'];
+                $productImg=$getRow['productImg'];
+                $productAuthor=$getRow['productAuthor'];
+                $published=$getRow['productPublished'];
+                if(strlen($productName)>17){
+                    $productName=substr($productName, 0, 17)."...";
+                }
+                ?>
+                <!-- Data fetched -->
+                <div class="content">
+                    <div><a href="../public/User_ProductView.php?product=<?=$ID?>"><img src="<?=$productImg?>" alt="" width=180px height=240px></a></div>
+                    <div class="name"><a href="../public/User_ProductView.php?product=<?=$ID?>"><?=$productName?></a></div>
+                    <div class="author"><a href=""><?="By ".$productAuthor?></a></div>
+                    <div class="price">NPR.<?=$productCost?></div>
+                    <div class="cart">
+                        <a href="cart.php?id=<?=$ID?>">
+                            <button>Add to cart</button>
+                        </a>
                     </div>
-                    <div class="productsHome"> 
-                    <?php
-                    while ($getRow = mysqli_fetch_array($runGet)){
-                        $ID=$getRow['productID'];
-                        $productName=$getRow['productName'];
-                        $productDesc=$getRow['productDesc'];
-                        $productCat=$getRow['productCategory'];
-                        $productCost=$getRow['productCost'];
-                        $productQty=$getRow['productQty'];
-                        $productImg=$getRow['productImg'];
-                        $productAuthor=$getRow['productAuthor'];
-                        $published=$getRow['productPublished'];
-                        if(strlen($productName)>17){
-                            $productName=substr($productName, 0, 17)."...";
-                        }
-                        if(strlen($productName)>25){
-                            $productName=substr($productName, 0, 25)."...";
-                        }
-                        ?>
-                        <!-- Data fetched -->
-                        <div class="content">
-                            <div><a href=""><img src="<?=$productImg?>" alt="" width=180px height=240px></a></div>
-                            <div class="name"><a href=""><?=$productName?></a></div>
-                            <div class="author"><a href=""><?="By ".$productAuthor?></a></div>
-                            <div class="price">NPR.<?=$productCost?></div>
-                            <div class="cart">
-                                <form action="" id="from-submit">
-                                    <input type="text" value=<?=$ID?> id="id" hidden>
-                                    <input type="text" value="<?=$productName?>" id="name" hidden>
-                                    <input type="text" value="<?=$productAuthor?>" id="author" hidden>
-                                    <input type="text" value="<?=$productImg?>" id="image" hidden>
-                                    <input type="text" value="<?=$productCost?>" id="cost" hidden>
-                                    <button id="BTn" onclick="carted()">Add to cart</button>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- data fetch end -->
-                        <?php
-                    }
-                }
-                else{
-                    
-                }
-            ?>
+                </div>
+                <!-- data fetch end -->
+                <?php
+            }
+        }
+        else{
+            echo 'No data found.';
+        }
+    ?>
         </div>
 
         <div class="homecat">
@@ -112,8 +103,8 @@
                         ?>
                         <!-- Data fetched -->
                         <div class="content">
-                            <div><a href=""><img src="<?=$productImg?>" alt="" width=180px height=240px></a></div>
-                            <div class="name"><a href=""><?=$productName?></a></div>
+                            <div><a href="../public/User_ProductView.php?product=<?=$ID?>"><img src="<?=$productImg?>" alt="" width=180px height=240px></a></div>
+                            <div class="name"><a href="../public/User_ProductView.php?product=<?=$ID?>"><?=$productName?></a></div>
                             <div class="author"><a href=""><?="By ".$productAuthor?></a></div>
                             <div class="price">NPR.<?=$productCost?></div>
                             <div class="cart">
@@ -132,49 +123,51 @@
             ?>
         </div>
         <div>    
-                    <?php
-                        $getQuery="SELECT * FROM products WHERE productStatus=1 AND productPriority=1  Limit 6";
-                        $runGet=mysqli_query($conn,$getQuery);
-                        $numData=mysqli_num_rows($runGet)>0;
-                        if($numData){
-                            echo "<div class = 'homecat'>Suggestions</div>";
-                            ?><div class="priority"><?php
-                            while ($getRow = mysqli_fetch_array($runGet)){
-                                $ID=$getRow['productID'];
-                                $productName=$getRow['productName'];
-                                $productDesc=$getRow['productDesc'];
-                                $productCat=$getRow['productCategory'];
-                                $productCost=$getRow['productCost'];
-                                $productQty=$getRow['productQty'];
-                                $productImg=$getRow['productImg'];
-                                $productAuthor=$getRow['productAuthor'];
-                                $published=$getRow['productPublished'];
-                                if(strlen($productName)>17){
-                                    $productName=substr($productName, 0, 17)."...";
-                                }
-                                ?>
-                                <!-- Data fetched -->
-                                <div class="content">
-                                    <div><a href=""><img src="<?=$productImg?>" alt="" width=180px height=240px></a></div>
-                                    <div class="name"><a href=""><?=$productName?></a></div>
-                                    <div class="author"><a href=""><?="By ".$productAuthor?></a></div>
-                                    <div class="price">NPR.<?=$productCost?></div>
-                                    <div class="cart">
-                                        <a href="cart.php?id=<?=$ID?>">
-                                            <button onclick=carted()>Add to cart</button>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- data fetch end -->
-                                <?php
-                            }
+        <div class="homecat">
+            <div>Our Suggestions</div>
+            <div class="view">VIEW ALL</div>
+        </div>
+        <div class="productsHome">    
+            <?php
+                $getQuery="SELECT * FROM products WHERE productStatus=1 AND productPriority=1  Limit 5";
+                $runGet=mysqli_query($conn,$getQuery);
+                $numData=mysqli_num_rows($runGet)>0;
+
+                if($numData){
+                    while ($getRow = mysqli_fetch_array($runGet)){
+                        $ID=$getRow['productID'];
+                        $productName=$getRow['productName'];
+                        $productDesc=$getRow['productDesc'];
+                        $productCat=$getRow['productCategory'];
+                        $productCost=$getRow['productCost'];
+                        $productQty=$getRow['productQty'];
+                        $productImg=$getRow['productImg'];
+                        $productAuthor=$getRow['productAuthor'];
+                        $published=$getRow['productPublished'];
+                        if(strlen($productName)>17){
+                            $productName=substr($productName, 0, 17)."...";
                         }
-                        else{
-                            // echo 'No data found.';
-                        }
-                    ?>
-                </div>
-            </div>
+                        ?>
+                        <!-- Data fetched -->
+                        <div class="content">
+                            <div><a href="../public/User_ProductView.php?product=<?=$ID?>"><img src="<?=$productImg?>" alt="" width=180px height=240px></a></div>
+                            <div class="name"><a href="../public/User_ProductView.php?product=<?=$ID?>"><?=$productName?></a></div>
+                            <div class="author"><a href=""><?="By ".$productAuthor?></a></div>
+                            <div class="price">NPR.<?=$productCost?></div>
+                            <div class="cart">
+                                <a href="cart.php?id=<?=$ID?>">
+                                    <button>Add to cart</button>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- data fetch end -->
+                        <?php
+                    }
+                }
+                else{
+                    echo 'No data found.';
+                }
+            ?>
         </div>    
     <div>
         <div>Footer</div>
