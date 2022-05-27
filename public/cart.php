@@ -1,6 +1,5 @@
 <?php
-    $msg="";
-
+$msg="";
     include ('../private/dbconnect.php');
     session_start();
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
@@ -102,11 +101,36 @@
 <head>
     <title>Cart || Bookship</title>
     <link rel="stylesheet" href="cart.css">
+    <style>
+        #buy{
+            text-decoration:none;
+            color:yellow;
+            font-size:24px;
+            font-weight:bold;
+            border:2px solid black;
+            border-radius:5px;
+            padding:2px 20px;
+            background-color:#0066ff;
+        }
+        #buy:hover{
+            transform: scaleX(1.1);
+            background-color:blue;
+        }
+    </style>
 </head>
 <body>
+    <div style="padding-left:140px">
+        <a href="User_home.php" style="text-decoration:dashed;color:brown;font-size:24px;font-weight:bold"><p><< <u>Continue shopping</u></p></a>
+    </div>
     <div class="allBody"> 
         <div class="cartbody" style="border:3px solid red;width:600px;padding:5px;border-radius:10px;background-color:#ff3333">
-        <div class="myCartHead" style="color:white;font-weight:bold;">MY CART<hr class="boldHR"></div>
+        <div class="myCartHead" style="color:white;font-weight:bold;display:flex;justify-content:space-between">
+            <div>MY CART</div>
+            <div>PRICE</div>
+        </div>
+        
+        <hr class="boldHR">
+
         <div class="msg" style="text-align:center;color:yellow"><?=$msg?></div>
             <?php
                 $cartQuery="SELECT * FROM cart WHERE userID=$userID";
@@ -133,15 +157,15 @@
                                                 <li><img src="<?=$img?>" alt="" height=130px width=100px style="border:1px solid white;"></li>
                                             </div>
                                             <div class="perBookDesc" style="margin-top:8px;padding:8px;">
-                                                <li style="display:flex;justify-content:space-between;width:400px;color:white;"><div><?="$name"?></div><div style="color:black">NPR.<?=$qty*$price?></div></li>
-                                                <li style="padding:2px 5px;font-size:16px;color:white"><?="by $author"?></li>
+                                                <li style="display:flex;justify-content:space-between;color:white;"><div><?="$name"?></div><div style="color:white;padding-left:200px;padding-right:5px">NPR.<?=$qty*$price?></div></li>
+                                                <li style="padding:2px 5px;font-size:16px;color:white"><i><?="by $author"?></i></li>
                                                 <div class="cartDown">
                                                     <li>
                                                         <form action="" method=POST>
                                                             <input type="text" value="<?=$name?>" name="name" hidden>
                                                             <input type="number" value="<?=$id?>" name="valued" hidden>
                                                             <li style="padding:2px 5px;font-size:16px;color:white">Quantity
-                                                            <input type="number" value="<?=$qty?>" name="qty" id="qty" onclick="touch()" min=1 max=<?=$orgqty?> style="width:40px;text-align:center;border:1px solid black;padding:1px;border-radius:5px"></li>
+                                                            <input type="number" value="<?=$qty?>" name="qty" id="qty" onclick="touch()" min=1 max=<?=$orgqty?> style="width:40px;text-align:center;border:1px solid black;padding:1px;border-radius:5px;font-weight:700;"></li>
                                                             <div id="manage">
                                                             <input type="submit" name="manage" value="SAVE" style="background-color:#1a1aff;border:1px solid #1a1aff;padding:2px;color:white;" >
                                                                 <input type="submit" name="wishlist" value="ADD TO WISHLIST" style="background-color:#ff751a;border:1px solid #ff751a;padding:2px;color:white">
@@ -183,8 +207,20 @@
                 ?></div>
             </div>
         </div>
-        <!-- PaymentSection -->
-        Payment
+    </div>
+    <div style="display:flex;justify-content:space-around;text-align:center;margin:0rem 7rem">
+        <form action="https://uat.esewa.com.np/epay/main" method="POST">
+            <input value="<?=$qty?>" name="tAmt" type="hidden">
+            <input value="<?=$qty?>" name="amt" type="hidden">
+            <input value="0" name="txAmt" type="hidden">
+            <input value="0" name="psc" type="hidden">
+            <input value="0" name="pdc" type="hidden">
+            <input value="EPAYTEST" name="scd" type="hidden">
+            <input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
+            <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
+            <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
+            <input value="BUY" id="buy" type="submit">
+        </form>
     </div>
 </body>
-</html
+</html>

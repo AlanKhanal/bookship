@@ -21,6 +21,6 @@ session_start();
     $query022="UPDATE products SET productStatus=1 WHERE adminID=$adminID AND productID=$productIDedit";
     $run022=mysqli_query($conn,$query022);
     if($run022){
-        header('location:../public/Admin_moreManagement.php');
+        header('location:../private/Admin_moreManagement.php');
     }
 ?>

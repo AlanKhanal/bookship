@@ -50,17 +50,18 @@
     <div>  
                 <!-- Data fetched -->
                 <div style="display:flex;margin:1rem 3rem;">
-                    <div style="text-align:center;">
-                        <div><a href="../public/User_ProductView.php?product=<?=$ID?>"><img src="<?=$productImg?>" alt="" width=250px height=340px style="border:2px solid #ff3333;padding:2px"></a></div>
-                        <div>
-                            <a href="cart.php?id=<?=$ID?>">
-                                <button style="margin:5px 0px;padding:0px">Add to cart</button>
+                    <div style="text-align:center;margin-bottom:2px;">
+                        <div><a href="<?=$productImg?>" target="_BLANK"><img src="<?=$productImg?>" alt="" width=250px height=340px style="border:2px solid #ff3333;padding:2px"></a></div>
+                        <div align=center style="margin-top:3px;">
+                            <a href='cart.php?id=<?=$ID?>'>
+                                <div class="button">Add to cart</div>
                             </a>
                         </div>
-                        <div>
-                            <a href="wishlist.php?id=<?=$ID?>">
-                                <button>Add to wishlist</button>
+                        <div align=center>
+                            <a href='wishlist.php?id=<?=$ID?>'>
+                                <div class="button" style="margin-top:-50px;">Add to wishlist</div>
                             </a>
+                            <hr style="margin-top:-45px;border-top:1px solid #ff3333;">
                         </div>
                     </div>
 
@@ -69,7 +70,7 @@
                         <div  style="font-size:20px;font-weight:bold;padding-left:8px"><i><a href="" style="text-decoration:none;color:black"><?="By ".$productAuthor?></a></i></div><br>
                         <div style="padding-left:10px">
                         <hr>
-                            <b style="color:grey">Synopsis</b>
+                            <b style="color:grey;">Synopsis</b>
                             <br>
                             <textarea name="" id="" cols="90" rows="14" style="border:none;resize:none;padding:5px 5px;color:grey;" readonly><?=$productDesc?></textarea>
                         </div>
@@ -84,5 +85,49 @@
         }
     ?>
     </div>
+
 </body>
 </html>
+
+<div style="display:flex;margin:1rem 3rem;display:flex;justify-content:space-between;">
+<h2>Related</h2>
+</div>
+<!-- Cat Under Product -->
+<?php
+$getQuery2="SELECT * FROM products WHERE productStatus=1 and productID!=$ID and productCategory='$productCat'";
+$runGet2=mysqli_query($conn,$getQuery2);
+$numData2=mysqli_num_rows($runGet2)>0;
+
+if($numData2){
+    while($getRow2 = mysqli_fetch_array($runGet2)){
+        $ID=$getRow2['productID'];
+        $productName2=$getRow2['productName'];
+        $productDesc=$getRow2['productDesc'];
+        $productCat=$getRow2['productCategory'];
+        $productCost=$getRow2['productCost'];
+        $productQty=$getRow2['productQty'];
+        $productImg=$getRow2['productImg'];
+        $productAuthor=$getRow2['productAuthor'];
+        $published=$getRow2['productPublished']; 
+?>
+<div class="productsHome" style="display:felx;flex-wrap:wrap;">  
+                <!-- Data fetched -->
+                <div class="content" align=center>
+                    <div><a href="../public/User_ProductView.php?product=<?=$ID?>"><img src="<?=$productImg?>" alt="" width=180px height=240px></a></div>
+                    <div class="name"><a href="../public/User_ProductView.php?product=<?=$ID?>"><?=$productName?></a></div>
+                    <div class="author"><a href=""><?="By ".$productAuthor?></a></div>
+                    <div class="price">NPR.<?=$productCost?></div>
+                    <div class="cart">
+                        <a href='cart.php?id=<?=$ID?>'>
+                            <div class="button">Add to cart</div>
+                        </a>
+                    </div>
+                </div>
+                <!-- data fetch end -->
+                <?php
+            }
+        }
+        else{
+            echo "<div style='padding:1rem 3rem;'>No related books found.</div>";
+        }
+    ?>

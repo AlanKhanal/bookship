@@ -1,3 +1,15 @@
+<?php
+            if(isset($_REQUEST['searchSub'])){
+                $sr=trim($_REQUEST['searchTxt']);
+                $valid=true;
+                if($sr==""){
+
+                }
+                else{
+                    header("location:../public/User_search.php?sr=$sr");
+                }
+            }
+            ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +20,7 @@
         }
         .w-body{
             background-color: #ff3333;
+            width: auto;
         }
         .w-body input,.w-body{
             font-size: 22px;
@@ -23,17 +36,22 @@
             justify-content: space-between;
         }
         .nav1-1 div{
-           padding: 5px 5px;
+           padding: 5px 0px;
         }
         .nav1 div{
-            padding:5px 5px;
+            padding:5px 0px;
+        }
+        .home:hover{
+            /* padding:5px 5px; */
+            transform: scaleX(1.1);
+        }
+        .cat:hover{
+            /* padding:5px 5px; */
+            transform: scaleX(1.1);
         }
         .nav2{
             display: flex;
             justify-content: space-between;
-        }
-        .nav2 div{
-            padding: 5px 5px;
         }
         .search{
             padding:0px;
@@ -48,6 +66,13 @@
         }
         .catList2{
             font-size: 22px;
+        }
+        .nav1-1 div{
+            padding-right:20px;
+        }
+        .icon img:hover{
+            /* width:37px; */
+            transform: scaleX(1.1);
         }
     </style>
 </head>
@@ -111,18 +136,19 @@
                 </div>
             </div>
             <div class="search">
-                <input type="text" placeholder="Search">
-                <input type="submit" name="submit" value="SEARCH">
+                <form action="" method="POST">
+                    <input type="text" placeholder="Search" name="searchTxt">
+                    <input type="submit" name="searchSub" value="SEARCH">
             </div>
             <div class="nav1-1">
-                <div class="cart">
-                    <a href="../public/cart.php">Cart</a>
+                <div class="icon">
+                <a href="../public/wishlist.php"><img src="../icon/listIcon.jpg" alt="" width=35px height=35px style="margin-top:-11px"></a>
                 </div>
-                <div class="wishlist">
-                <a href="../public/wishlist.php">Wishlist</a>
+                <div class="icon">
+                    <a href="../public/cart.php"><img src="../icon/cartIcon.jpg" alt="" width=35px height=35px style="margin-top:-11px"></a>
                 </div>
-                <div class="profile">
-                <a href="../public/profile.php">Profile</a>
+                <div class="icon">
+                <a href="../public/profile.php"><img src="../icon/profIcon.jpg" alt="" width=35px height=33px style="margin-top:-11px"></a>
                 </div>
             </div>
         </div>

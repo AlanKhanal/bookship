@@ -16,10 +16,7 @@
         $userName=$row['userName'];
         $userEmail=$row['email'];
     }
-        if(isset($_REQUEST['cat'])){
-            $cat=$_REQUEST['cat'];
-        }
-        ?>
+?>
         <!DOCTYPE html>
         <html>
         <head>
@@ -27,10 +24,28 @@
             <link rel="stylesheet" href="../private/userhome.css">
         </head>
         <body>
-            <div style="margin:0rem 2rem;padding:0px;font-size:30px;color:#ff3333;"><?=strtoupper("$cat")?></div><hr style="margin:0rem 1rem;border-top:1px solid #ff3333;"><br>
-            <div class="productsHome" style="display:flex;flex-wrap:wrap;padding-left:50px;"> 
+            <div style="display:flex;justify-content:space-between;">
+                <div style="margin:0rem 2rem;padding:0px;font-size:30px;color:#ff3333;">
+                    Collection
+                </div>
+                <!-- <div style="margin:0rem 2rem;padding:0px;padding-top:10px;font-size:15px;color:#ff3333;">
+                    sort by
+                </div> -->
+            </div>
+            <!-- SORT BY -->
+            <!-- <div style="display:flex;justify-content:flex-end;">
+                <div>
+                    <a href=""></a>
+                </div>
+                <div>
+                    s
+                </div>
+            </div> -->
+            <hr style="margin:0rem 1rem;border-top:1px solid #ff3333;">
+            <br>
+    <div class="productsHome" style="display:flex;flex-wrap:wrap;padding-left:50px;"> 
     <?php
-        $getQuery="SELECT * FROM products WHERE productStatus=1 and productcategory='$cat'";
+        $getQuery="SELECT * FROM products WHERE productStatus=1";
         $runGet=mysqli_query($conn,$getQuery);
         $numData=mysqli_num_rows($runGet)>0;
 

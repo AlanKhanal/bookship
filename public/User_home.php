@@ -31,7 +31,7 @@
     <div class="shelf">   
     <div class="homecat">
             <div>Collection</div>
-            <div class="view">VIEW ALL</div>
+            <div class="view"><a href="collection.php" style="text-decoration:none;color:black">VIEW ALL</a></div>
         </div>
         <div class="productsHome">  
     <?php
@@ -61,8 +61,8 @@
                     <div class="author"><a href=""><?="By ".$productAuthor?></a></div>
                     <div class="price">NPR.<?=$productCost?></div>
                     <div class="cart">
-                        <a href="cart.php?id=<?=$ID?>">
-                            <button>Add to cart</button>
+                        <a href='cart.php?id=<?=$ID?>'>
+                            <div class="button">Add to cart</div>
                         </a>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
 
         <div class="homecat">
             <div>New Arrivals</div>
-            <div class="view">VIEW ALL</div>
+            <div class="view"><a href="newArrivals.php" style="text-decoration:none;color:black">VIEW ALL</a></div>
         </div>
         <div class="productsHome">    
             <?php
@@ -108,8 +108,8 @@
                             <div class="author"><a href=""><?="By ".$productAuthor?></a></div>
                             <div class="price">NPR.<?=$productCost?></div>
                             <div class="cart">
-                                <a href="cart.php?id=<?=$ID?>">
-                                    <button>Add to cart</button>
+                                <a href='cart.php?id=<?=$ID?>'>
+                                    <div class="button">Add to cart</div>
                                 </a>
                             </div>
                         </div>
@@ -155,8 +155,8 @@
                             <div class="author"><a href=""><?="By ".$productAuthor?></a></div>
                             <div class="price">NPR.<?=$productCost?></div>
                             <div class="cart">
-                                <a href="cart.php?id=<?=$ID?>">
-                                    <button>Add to cart</button>
+                                <a href='cart.php?id=<?=$ID?>'>
+                                    <div class="button">Add to cart</div>
                                 </a>
                             </div>
                         </div>
@@ -173,7 +173,7 @@
         <div>Footer</div>
     </div>
     <!-- cart ajax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script type="text/javascript">
         function carted(){
@@ -191,6 +191,6 @@
                         // document.getElementById('success').style.display="block";
                         success();
         }
-    </script>
+    </script>-->
 </body>
 </html>

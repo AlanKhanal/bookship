@@ -112,8 +112,8 @@ nav ul ul li{
 
                 <li><a href="">Switch</a>
                     <ul>
-                        <li><a href="Admin_login.php">Admin</a></li>
-                        <li><a href="User_login.php">User</a></li>
+                        <li><a href="../public/Admin_login.php">Admin</a></li>
+                        <li><a href="../public/User_login.php">User</a></li>
                     </ul>
                 </li>
 
