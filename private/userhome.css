@@ -20,20 +20,23 @@ a{
 .homecat{
     display: flex;
     justify-content: space-between;
+    flex-wrap:wrap;
     font-size: 22px;
     padding-top: 11px;
     padding-bottom: 22px;
     font-weight: bold;
+    /* width: 100%; */
     /* margin:0% 10%; */
 }
 .productsHome{
     display: flex;
+    flex-wrap:wrap;
     /* margin:0% 10%;
     padding:1% 0%; */
 }
 .content{
     margin:0px 30px;
-    width:250px;
+    width:180px;
 }
 /* Solo product Management */
 .name a{

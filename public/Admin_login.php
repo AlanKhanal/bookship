@@ -16,7 +16,7 @@
         </div>
         <div class="login-form">
             <form action="" method="POST">
-                <label for="">Admin Name:</label>
+                <label for="">Admin Name</label>
             <input type="text" id="adminName" class="input-class" name="adminName" >
             <br>
 <!-- password -->

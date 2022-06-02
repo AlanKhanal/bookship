@@ -100,6 +100,13 @@ if(isset($_POST['submit'])){
 if(isset($_POST['submit'])){
     $dbValid=true;
     if($valid){
+        $checkQuery8="SELECT * FROM admins";
+        $run8 = mysqli_query($conn, $checkQuery8);
+        $number_of_users8 = mysqli_num_rows($run8);
+        if($number_of_users8==1){
+            $msg.="This system is already registered.<br><a href='../private/rule.php' target='_blank'>Learn More</a>";
+            $dbValid=false;
+        }    
         //send mail if already an admin but not verified mail
         $checkQuery0="SELECT * FROM admins WHERE `email`='$email' AND `emailVerification`=0";
         $run0 = mysqli_query($conn, $checkQuery0);

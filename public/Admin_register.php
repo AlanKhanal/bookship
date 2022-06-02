@@ -18,7 +18,7 @@
 
             <div class="signup-form">
                 <form action="" method="POST">
-                    <label for="">Admin Username:</label>
+                    <label for="">Admin Username</label>
                     <input type="text" id="adminName" class="input-class" name="adminName" >
                     <br>
 

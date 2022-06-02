@@ -22,21 +22,24 @@
 <html>
 <head>
     <title>Admin Extra Management</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../private/AdminRegLog.css">
 </head>
 <body>
     <div>
         <table>
             <thead>
-                <tr width=100% align=left>
-                    <th width=10%>Book Name</th>
-                    <th width=10%>Book Category</th>
-                    <th width=10%>Book Description</th>
-                    <th width=10%>Book Cost</th>
-                    <th width=10%>Book Image</th>
-                    <th width=10%>Product Quantity</th>
-                    <th width=10%>Published Date</th>
-                    <th width=10%>Manage</th>
-                </tr>
+            <tr class="table-head" width=100% style="background:red;color:white;">
+                        <th width=10% scope="col" style="border-right:1px solid black;">Name</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Category</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Description</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Cost</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Image</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Quantity</th>
+                        <th width=15% scope="col" style="border-right:1px solid black;">Published On</th>
+                        <th width=15% scope="col" style="border-right:1px solid black;">Management</th>
+                  </tr>
             </thead>
             <tbody>
                     <?php
@@ -69,7 +72,7 @@
                         <td><?=$productQty?></td>
                         <td><?=$published?></td>
                         <td>
-                            <button class="btn btn-primary"><a href="http://localhost:8081/bookship/private/Admin_product_unhide.php?productID=<?=$ID?>" class="text-light">UNHIDE</a></button>
+                            <button class="btn btn-primary" ><a href="http://localhost:8081/bookship/private/Admin_product_unhide.php?productID=<?=$ID?>" class="text-light">UNHIDE</a></button>
                             <button class="btn btn-danger"><a href="http://localhost:8081/bookship/private/Admin_product_permDelete.php?deleteID=<?=$ID?>" class="text-light">DELETE</a></button>
                         </td>
                 </tr>

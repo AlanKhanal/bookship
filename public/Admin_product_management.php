@@ -140,12 +140,16 @@ include '../private/Admin_product_management_BE.php';
         <!-- ********************************************DIVISION********************************************* -->
         <div style="display:flex;justify-content:space-between">
             <div><h2 align=center>BOOK</h2></div>
-            <div>
+            <form action="" method="POST">
+              <input type="text" name="search" placeholder="Search Category">
+              <input type="submit" name="prdSearch" value="SEARCH">
+          </form>
+            <!-- <div>
                 <form action="" method="POST">
                     <input type="search" name="search">
                     <input type="submit" name="search" value="SEARCH">
                 </form>
-            </div>
+            </div> -->
         </div>
         <div><?=$tablemsg?></div>
         <div>
@@ -168,6 +172,12 @@ include '../private/Admin_product_management_BE.php';
                     <tr>
                     <?php
                         $queryTable="SELECT * FROM products WHERE adminID=$adminID and productStatus=1 ORDER BY productPublished desc";
+                        if(isset($_REQUEST['prdSearch'])){
+                            $csrch=$_REQUEST['search'];
+                            // echo $csrch;
+                            $queryTable="SELECT * FROM products WHERE adminID=$adminID and productStatus=1 and productName LIKE '%$csrch%' ORDER BY productPublished desc";
+                            // echo "Search result for $csrch";
+                        }
                         $runTable=mysqli_query($conn,$queryTable);
                         while ($row = mysqli_fetch_array($runTable)){
                             $ID=$row['productID'];

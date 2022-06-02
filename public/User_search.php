@@ -1,19 +1,19 @@
 <?php
     include ('../private/dbconnect.php');
-    session_start();
-    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
-    {
-        header("location: user_login.php");
-    }
-    $user = $_SESSION['userName'];
-    $query = "SELECT * FROM users WHERE userName='$user'";
-    $run=mysqli_query($conn,$query);
-    if (mysqli_num_rows($run) > 0){
-        $row = mysqli_fetch_assoc($run);
-        $userID=$row['userID'];
-        $userName=$row['userName'];
-        $userEmail=$row['email'];
-    }
+    // session_start();
+    // if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
+    // {
+    //     header("location: user_login.php");
+    // }
+    // $user = $_SESSION['userName'];
+    // $query = "SELECT * FROM users WHERE userName='$user'";
+    // $run=mysqli_query($conn,$query);
+    // if (mysqli_num_rows($run) > 0){
+    //     $row = mysqli_fetch_assoc($run);
+    //     $userID=$row['userID'];
+    //     $userName=$row['userName'];
+    //     $userEmail=$row['email'];
+    // }
 ?>
 <?php
     include('../private/User_nav.php');
@@ -72,13 +72,13 @@ if(isset($_REQUEST['sr'])){
 <div style="padding:0rem 4rem">
         <div class="result">
             <div class="rBox" style="display:flex;">
-                <div id="image"><a href="../public/User_ProductView.php?product=<?=$ID?>"><img src="<?=$productImg?>" alt="" width="100px" height=150px></a></div>
+                <div id="image" style="margin-top:1rem;"><a href="../public/User_ProductView.php?product=<?=$ID?>"><img src="<?=$productImg?>" alt="" width="100px" height=150px></a></div>
                 <div id="details" style="padding:0rem 1rem;">
                     <div style="font-size:24px;padding-bottom:5px;padding-top:5px;"><b><a style="text-decoration:none;color:black;" href="../public/User_ProductView.php?product=<?=$ID?>"><?=$productName?></a></b></div>
                     <div><i><?="by "."$productAuthor"?></i></div>
                     <div style="padding-top:60px;">
                         <a href='cart.php?id=<?=$ID?>' style="text-decoration:none;color:#ff3333;font-size:20px;">
-                            <div class="button" style="border:1px solid #ff3333;padding:3px 7px;width:100px;">Add to cart</div>
+                            <div class="button" style="border:1px solid #ff3333;padding:2px 7px;width:100px;">Add to cart</div>
                         </a></div>
                 </div>
             </div>
@@ -93,4 +93,6 @@ if(isset($_REQUEST['sr'])){
 }
 ?>
 
-
+<?php
+include('User_footer.php');
+?>

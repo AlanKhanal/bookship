@@ -22,16 +22,29 @@
 <html>
 <head>
     <title>Admin Extra Management</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../private/AdminRegLog.css">
+    <style>
+        th{
+            background-color: red;
+            color: white;
+        }
+        td{
+            background-color: wheat;
+            padding:2px 20px
+        }
+    </style>
 </head>
 <body>
     <div align=center><h2>Category Management</h2></div>
-    <div>
+    <br>
+    <div align=center>
         <table align=center>
             <thead>
-                <tr>
-                    <th>Book Name</th>
-                    <th>Book Description</th>
-                    <th>Manage</th>
+                <tr align="center">
+                    <th style="border-right:1px solid white">Book Name</th>
+                    <th style="border-right:1px solid white">Book Description</th>
+                    <th style="border-right:1px solid white">Manage</th>
                 </tr>
             </thead>
             <tbody>

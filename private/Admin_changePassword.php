@@ -24,25 +24,46 @@ session_start();
 <html>
 <head>
     <title>Change Password</title>
+    <style>
+        input{
+            font-size: 16px;
+            padding:2px 10px;
+            border-radius: 5px;
+            border:2px solid grey;
+        }
+        label{
+            font-size: 16px;
+            padding:2px 10px;
+        }
+        #pwchange{
+            text-align: center;
+
+        }
+        #headed{
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+    </style>
 </head>
 <body>
-    <div>Change Password</div>
-    <div>
+    <div id="headed"><h1>Change Password</h1></div>
+    <div id="pwchange">
         <form action="" method="POST">
             <div>
-                <label for="">Current Password</label>
+                <label for="">Current Password</label><br>
                 <input type="password" name="pass">
             </div>
             <br>
             <div>
-                <label for="">New Password</label>
+                <label for="">New Password</label><br>
                 <input type="password" name="newPassword">
                 <br>
-                <label for="">Confirm New Password</label>
+                <br>
+                <label for="">Confirm New Password</label><br>
                 <input type="password" name="confNewPassword">
             </div>
-
-            <input type="submit" value="submit" name="submit">
+<br>
+            <input type="submit" value="submit" name="submit" style="border:2px solid grey;background-color:black;color:white;">
         </form>
     </div>
 </body>

@@ -1,27 +1,27 @@
 <?php
     include ('../private/dbconnect.php');
-    session_start();
-    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
-    {
-        header("location:User_login.php");
-    }
-    $user = $_SESSION['userName'];
+    // session_start();
+    // if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
+    // {
+    //     header("location:User_login.php");
+    // }
+    // $user = $_SESSION['userName'];
 
     include("../private/User_nav.php");
 
 
-    $query = "SELECT * FROM users WHERE userName='$user'";
-    $run=mysqli_query($conn,$query);
-    if (mysqli_num_rows($run) > 0){
-        $row = mysqli_fetch_assoc($run);
-        $userID=$row['userID'];
-        $userName=$row['userName'];
-        $userEmail=$row['email'];
-    }
+    // $query = "SELECT * FROM users WHERE userName='$user'";
+    // $run=mysqli_query($conn,$query);
+    // if (mysqli_num_rows($run) > 0){
+    //     $row = mysqli_fetch_assoc($run);
+    //     $userID=$row['userID'];
+    //     $userName=$row['userName'];
+    //     $userEmail=$row['email'];
+    // }
         if(isset($_REQUEST['product'])){
             $pID=$_REQUEST['product'];
         }
-        $getQuery="SELECT * FROM products WHERE productStatus=1 and productID='$pID'";
+        $getQuery="SELECT * FROM products WHERE productStatus=1 and productQty>0 and productID='$pID'";
         $runGet=mysqli_query($conn,$getQuery);
         $numData=mysqli_num_rows($runGet)>0;
 
@@ -94,7 +94,7 @@
 </div>
 <!-- Cat Under Product -->
 <?php
-$getQuery2="SELECT * FROM products WHERE productStatus=1 and productID!=$ID and productCategory='$productCat'";
+$getQuery2="SELECT * FROM products WHERE productStatus=1 and productID!=$ID and productCategory='$productCat' and productQty>0";
 $runGet2=mysqli_query($conn,$getQuery2);
 $numData2=mysqli_num_rows($runGet2)>0;
 
@@ -110,7 +110,7 @@ if($numData2){
         $productAuthor=$getRow2['productAuthor'];
         $published=$getRow2['productPublished']; 
 ?>
-<div class="productsHome" style="display:felx;flex-wrap:wrap;">  
+<div class="productsHome" style="display:flex;flex-wrap:wrap;">  
                 <!-- Data fetched -->
                 <div class="content" align=center>
                     <div><a href="../public/User_ProductView.php?product=<?=$ID?>"><img src="<?=$productImg?>" alt="" width=180px height=240px></a></div>
@@ -123,11 +123,17 @@ if($numData2){
                         </a>
                     </div>
                 </div>
+
                 <!-- data fetch end -->
                 <?php
             }
         }
         else{
             echo "<div style='padding:1rem 3rem;'>No related books found.</div>";
-        }
+            }
+            echo "</div>";
+            echo "</div>";
     ?>
+    <div style="width:100%;"><?php
+include('User_footer.php');
+?></div>

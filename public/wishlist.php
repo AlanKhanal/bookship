@@ -17,14 +17,14 @@ $msg="";
     }
 
     if(isset($_REQUEST['id'])){
-        $id=$_REQUEST['id'];
+        $id2=$_REQUEST['id'];
         //FETCHprdtData
-        $fetch2="SELECT * FROM cart WHERE productID=$id and userID=$userID";
+        $fetch2="SELECT * FROM wishlist WHERE productID=$id2 and userID=$userID";
             $runfetch2=mysqli_query($conn,$fetch2);
             if($runfetch2){
                 $numData2=mysqli_num_rows($runfetch2);
                 if($numData2<1){
-                    $fetch="SELECT * FROM products WHERE productID=$id and productQty>0";
+                    $fetch="SELECT * FROM products WHERE productID=$id2";
                     $runfetch=mysqli_query($conn,$fetch);
                     if($runfetch){
                         $numData=mysqli_num_rows($runfetch);
@@ -38,13 +38,10 @@ $msg="";
                                     $img=$getRow['productImg'];
                                     $orgqty=$getRow['productQty'];
 
-                                    $unique=uniqid();
-
                                     $prdPrice=$productCost2*$productQty2;
-                                    $cartInsertion="INSERT INTO cart(`userID`,`productID`,`qty`,`price`,`prdPrice`,`name`,`pDesc`,`auth`,`img`,`orgqty`,`totPrice`,`uniquecart`) 
-                                    VALUES($userID,$id,1,$productCost2,$prdPrice,'$productName','$productDesc','$productAuthor','$img',$orgqty,1*$productCost2,'62961f8211776-23cart$userID')";
-                                    if(mysqli_query($conn,$cartInsertion)){
-                                        header("location:cart.php");
+                                    $wishlistInsertion="INSERT INTO wishlist(`userID`,`productID`,`qty`,`price`,`prdPrice`,`name`,`pDesc`,`auth`,`img`,`orgqty`,`totPrice`) VALUES($userID,$id2,1,$productCost2,$prdPrice,'$productName','$productDesc','$productAuthor','$img',$orgqty,1*$productCost2)";
+                                    if(mysqli_query($conn,$wishlistInsertion)){
+                                        header("location:wishlist.php");
                                     }
                                 // $totPrice="SELECT SUM(prdPrice) AS totPrice FROM OrderDetails WHERE userID=$userID";
                                 // $runtot=mysqli_query($conn,$totPrice);
@@ -54,7 +51,7 @@ $msg="";
                 }
             }
             else{
-                $msg= "BOOK ALREADY EXIST IN CART.<br>";
+                $msg= "Book Already exist in wishlist.<br>";
             }
             
         }
@@ -63,31 +60,9 @@ $msg="";
 ?>
     
 <?php
-    if(isset($_REQUEST["manage"])){
-        $named=$_REQUEST['name'];
-        $cartID = $_REQUEST['valued'];
-        $qty = $_REQUEST['qty'];
-        
-        $tot=mysqli_query($conn,"SELECT * FROM cart WHERE `cartID`=$cartID");
-        $getT = mysqli_fetch_assoc($tot);
-        $myprice=$qty*$getT['price'];
-
-
-
-        $qtyQuery="UPDATE cart 
-                SET `qty`=$qty,`totPrice`=$myprice
-                WHERE `cartID`=$cartID";
-        if(mysqli_query($conn,$qtyQuery)){
-            // echo "Successfully updated quantity of Book <b>".$named."</b>.";
-            // header("http://localhost:8081/bookship/public/cart.php#");
-        }
-    }
     if(isset($_REQUEST["remove"])){
-        $named=$_REQUEST['name'];
-        $cartID = $_REQUEST['valued'];
-        $qty = $_REQUEST['qty'];
-
-        $dltQuery="DELETE FROM cart WHERE `cartID`=$cartID";
+        $wListID = $_REQUEST['valued'];
+        $dltQuery="DELETE FROM wishlist WHERE `wListID`=$wListID";
         if(mysqli_query($conn,$dltQuery)){
             // echo "Successfully updated quantity of Book <b>".$named."</b>.";
             // header("http://localhost:8081/bookship/public/cart.php#");
@@ -102,33 +77,14 @@ $msg="";
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cart || Bookship</title>
+    <title>Wishlist || Bookship</title>
     <link rel="stylesheet" href="cart.css">
-    <style>
-        #buy{
-            text-decoration:none;
-            color:yellow;
-            font-size:24px;
-            font-weight:bold;
-            border:2px solid black;
-            border-radius:5px;
-            padding:2px 20px;
-            background-color:#0066ff;
-        }
-        #buy:hover{
-            transform: scaleX(1.1);
-            background-color:blue;
-        }
-    </style>
 </head>
 <body>
-    <div style="padding-left:140px">
-        <a href="User_home.php" style="text-decoration:dashed;color:brown;font-size:24px;font-weight:bold"><p><< <u>Continue shopping</u></p></a>
-    </div>
     <div class="allBody"> 
-        <div class="cartbody" style="border:3px solid red;width:600px;padding:5px;border-radius:10px;background-color:#ff3333">
+        <div class="cartbody" style="border:3px solid red;width:600px;padding:5px;border-radius:10px;background-color:#E75480">
         <div class="myCartHead" style="color:white;font-weight:bold;display:flex;justify-content:space-between">
-            <div>MY CART</div>
+            <div>Wishlist</div>
             <div>PRICE</div>
         </div>
         
@@ -136,13 +92,12 @@ $msg="";
 
         <div class="msg" style="text-align:center;color:yellow"><?=$msg?></div>
             <?php
-                $cartQuery="SELECT * FROM cart WHERE userID=$userID ";
+                $cartQuery="SELECT * FROM wishlist WHERE userID=$userID";
                 $runcartQuery=mysqli_query($conn,$cartQuery);
                 if($runcartQuery){
                     if(($totRows=mysqli_num_rows($runcartQuery)) > 0){
                         while($Row32=mysqli_fetch_array($runcartQuery)){
-                            $id=$Row32['cartID'];
-                            $pID=$Row32['productID'];
+                            $id2=$Row32['wListID'];
                             $name=$Row32['name'];
                             $author=$Row32['auth'];
                             $desc=$Row32['pDesc'];
@@ -167,23 +122,11 @@ $msg="";
                                                     <li>
                                                         <form action="" method=POST>
                                                             <input type="text" value="<?=$name?>" name="name" hidden>
-                                                            <input type="number" value="<?=$id?>" name="valued" hidden>
-                                                            <li style="padding:2px 5px;font-size:16px;color:white">Quantity
-                                                            <?php
-                                                            $orders=mysqli_query($conn,"SELECT * FROM orders WHERE productID=$pID");
-                                                            $ordered= 0;
-                                                            if(($totRows=mysqli_num_rows($orders)) > 0){
-                                                                                while ($numor = mysqli_fetch_assoc ($orders)) {
-                                                                                    $ordered += $numor['qty'];
-                                                                                }
-                                                            }
-                                                            // echo "<b>NPR.".$ordered."</b>";
-                                                            ?>
-                                                            <input type="number" value=<?=$qty?> name="qty" id="qty" onclick="touch()" min=1 max=<?=$orgqty?> style="width:40px;text-align:center;border:1px solid black;padding:1px;border-radius:5px;font-weight:700;"></li>
+                                                            <input type="number" value="<?=$id2?>" name="valued" hidden>
+                                                           
                                                             <div id="manage">
-                                                            <input type="submit" name="manage" value="SAVE" style="background-color:#1a1aff;border:1px solid #1a1aff;padding:2px;color:white;" >
-                                                                <a href="wishlist.php?id=<?=$Row32['productID']?>" style="text-decoration:none;background-color:#E75480;border:1px solid #E75480;padding:1px;color:white;font-size:14px">ADD TO WISHLST</a>
-                                                                <input type="submit" name="remove" value="DELETE" style="background-color:grey;border:1px solid grey;padding:2px;color:white">
+                                                                <a href="cart.php?id=<?=$Row32['productID']?>" style="text-decoration:none;background-color:#ff3333;border:1px solid #ff751a;padding:2px;color:white;font-size:14px">ADD TO CART</a>
+                                                                <input type="submit" name="remove" value="DELETE" style="background-color:black;border:1px solid black;padding:2px;color:white">
                                                             </div>
                                                             
                                                         </form>
@@ -211,7 +154,7 @@ $msg="";
             
                 <div style="font-weight:bold">TOTAL</div>
                 <div><?php
-                    $query32 = "SELECT * FROM cart WHERE userID=$userID";
+                    $query32 = "SELECT * FROM wishlist WHERE userID=$userID";
                     $query_run = mysqli_query($conn,$query32);
                     $qty= 0;
                     while ($num = mysqli_fetch_assoc ($query_run)) {
@@ -222,20 +165,10 @@ $msg="";
             </div>
         </div>
     </div>
-    <div style="display:flex;justify-content:space-around;text-align:center;margin:0rem 7rem">
-        <a href="buyerInfo.php?uqid=62961f8211776-23cart<?=$userID?>"><button id="buy">Proceed to buy</button></a>
-        <!-- <form action="https://uat.esewa.com.np/epay/main" method="POST">
-            <input value="<?=$qty?>" name="tAmt" type="hidden">
-            <input value="<?=$qty?>" name="amt" type="hidden">
-            <input value="0" name="txAmt" type="hidden">
-            <input value="0" name="psc" type="hidden">
-            <input value="0" name="pdc" type="hidden">
-            <input value="EPAYTEST" name="scd" type="hidden">
-            <input value="ee2c3ca" name="pid" type="hidden">
-            <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
-            <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
-            <input value="BUY" id="buy" type="submit">
-        </form> -->
+    
+    <div style="display:flex;justify-content:space-between;margin:1rem 3rem;">
+        <a href="User_home.php" style="text-decoration:dashed;color:brown;font-size:24px;font-weight:bold"><p><< <u>CONTINUE SHOPPING</u></p></a>
+        <a href="cart.php" style="text-decoration:dashed;color:brown;font-size:24px;font-weight:bold"><p><u>CHECK CART</u> >></p></a>
     </div>
 </body>
 </html>

@@ -27,6 +27,9 @@
         <div class="admin-nav-list">
             <a href="../public/Admin_register.php">Register</a>
         </div>
+        <div class="admin-nav-list">
+            <a href="../public/user_login.php">User</a>
+        </div>
     </div>
 </body>
 </html>

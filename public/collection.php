@@ -1,21 +1,21 @@
 
 <?php
     include ('../private/dbconnect.php');
-    session_start();
-    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
-    {
-        header("location: ../public/User_login.php");
-    }
-    $user = $_SESSION['userName'];
+    // session_start();
+    // if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
+    // {
+    //     // header("location: ../public/User_login.php");
+    // }
+    // $user = $_SESSION['userName'];
     include("../private/User_nav.php");
-    $query = "SELECT * FROM users WHERE userName='$user'";
-    $run=mysqli_query($conn,$query);
-    if (mysqli_num_rows($run) > 0){
-        $row = mysqli_fetch_assoc($run);
-        $userID=$row['userID'];
-        $userName=$row['userName'];
-        $userEmail=$row['email'];
-    }
+    // $query = "SELECT * FROM users WHERE userName='$user'";
+    // $run=mysqli_query($conn,$query);
+    // if (mysqli_num_rows($run) > 0){
+    //     $row = mysqli_fetch_assoc($run);
+    //     $userID=$row['userID'];
+    //     $userName=$row['userName'];
+    //     $userEmail=$row['email'];
+    // }
 ?>
         <!DOCTYPE html>
         <html>
@@ -45,7 +45,7 @@
             <br>
     <div class="productsHome" style="display:flex;flex-wrap:wrap;padding-left:50px;"> 
     <?php
-        $getQuery="SELECT * FROM products WHERE productStatus=1";
+        $getQuery="SELECT * FROM products WHERE productStatus=1 and productQty>0";
         $runGet=mysqli_query($conn,$getQuery);
         $numData=mysqli_num_rows($runGet)>0;
 
@@ -87,3 +87,6 @@
     </div>
 </body>
 </html>
+<?php
+include('User_footer.php');
+?>

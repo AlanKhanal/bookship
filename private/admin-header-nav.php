@@ -3,6 +3,12 @@
 <head>
         <title>Document</title>
         <style>
+            *{
+                margin:0px;
+                padding: 0px;    
+                font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+            }
                 nav{
     background: cornflowerblue;
 }
@@ -93,8 +99,6 @@ nav ul ul li{
                         <li><a href="../public/Admin_category_management.php">Categories</a></li>
                     </ul>
                 </li>
-
-                <li><a href="">About Us</a></li>
 
                 <li>
                         <a href="">Settings</a>

@@ -4,8 +4,8 @@ include 'dbconnect.php';
 session_start();
 // check if the user is already logged in
 if(isset($_SESSION['userID'])){
-    header("location:User_home.php");
-    exit;
+    // header("location:User_home.php");
+    // exit;
 }
 
 //validationCheck
@@ -35,7 +35,7 @@ if(isset($_POST['submit'])){
         $check1 = mysqli_query($conn, $userCheck);
         $num1 = mysqli_num_rows($check1);
         if($num1<1){
-            echo '<div class="error">Username and Password not matched.</div>';
+            $msg.= 'Username and Password not matched.';
             $valid=false;
         }
         elseif($num1==1){
@@ -49,10 +49,10 @@ if(isset($_POST['submit'])){
                 $userID=$row['userID'];
             }
             else{
-                echo 'verify login in email.';
+                $msg.= 'verify login in email.';
             }
             $_SESSION["userID"]=$userID;
-            // echo $id;
+            // $msg.= $id;
             header("location:User_home.php");
             }
     }

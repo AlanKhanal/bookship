@@ -26,7 +26,7 @@
             font-size: 22px;
         }
         .w-body div{
-            padding: 0px 5%;
+            padding: 0px 1%;
         }
         .nav1{
             text-align: center;
@@ -137,8 +137,10 @@
             </div>
             <div class="search">
                 <form action="" method="POST">
-                    <input type="text" placeholder="Search" name="searchTxt">
+                    <div style="display:flex;justify-content:flex-start;">
+                        <input type="text" placeholder="Search" name="searchTxt">
                     <input type="submit" name="searchSub" value="SEARCH">
+                </div>
             </div>
             <div class="nav1-1">
                 <div class="icon">

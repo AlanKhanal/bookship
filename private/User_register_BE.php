@@ -76,13 +76,13 @@ if(isset($_POST['submit'])){
         $checkQuery0="SELECT * FROM users WHERE `email`='$email' AND `emailVerification`=0";
         $run0 = mysqli_query($conn, $checkQuery0);
         $number_of_users0 = mysqli_num_rows($run0);
-        if($number_of_users0==1){
+        if($number_of_users0>1){
             $dbValid=false;
             $to0=$email;
             $subject0='E-mail Verification.';
             $message0="Click the link to confirm your book store registration into bookship.
                     http://localhost:8081/bookship/private/user-mailVerification.php?user=$userName";
-            $headers0="From:less.secure.email.for.students@gmail.com";
+            $headers0="alankhanal2001@gmail.com";
             // header("location:login.php");
             $mail0=mail($to0,$subject0,$message0,$headers0);
             if($mail0){
@@ -91,7 +91,7 @@ if(isset($_POST['submit'])){
             }
             else{
                 $dbValid=false;
-                $run_insertRegForm0=mysqli_query($conn,$insertRegForm0);
+                // $run_insertRegForm0=mysqli_query($conn,$insertRegForm0);
             }              
         }
         //check email from database
@@ -114,7 +114,6 @@ if(isset($_POST['submit'])){
         }
         if($dbValid){
             // insert into dabase
-
             $insertRegForm="INSERT INTO users(`userName`,`password`,`email`) VALUES('$userName','$password','$email')";
             $run_insertRegForm=mysqli_query($conn,$insertRegForm);
             if($run_insertRegForm){
@@ -122,7 +121,7 @@ if(isset($_POST['submit'])){
                     $subject='E-mail Verification.';
                     $message="Click the link to confirm your book store registration into bookship.
                             http://localhost:8081/bookship/private/user-mailVerification.php?user=$userName";
-                    $headers="From:less.secure.email.for.students@gmail.com";
+                    $headers="alankhanal2001@gmail.com";
                     // header("location:login.php");
                     $mail=mail($to,$subject,$message,$headers);
                     if($mail){

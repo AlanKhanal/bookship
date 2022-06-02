@@ -24,38 +24,58 @@ session_start();
 <html>
 <head>
     <title>Edit Profile</title>
+    <style>
+        input{
+            margin-top: 10px;
+            font-size: 16px;
+            padding:2px 10px;
+            border-radius: 5px;
+            border:2px solid grey;
+        }
+        label{
+            font-weight: 600;
+            font-size: 16px;
+            padding:2px 10px;
+        }
+        #headed{
+            text-align: center;
+            margin-bottom: 0rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Edit Profile</h1>
-    <div>
+    <div id="headed">
+        <h1>EDIT INFORMATION</h1>
+    </div>
+    <div align=center>
         <form action="" method="POST">
-
 <!-- adminName -->
-            <label for="">Admin Username:</label>
-            <input type="text" id="adminName" class="" name="adminName" value="<?=$adminName?>" required>
+            <!-- <label for="">Admin Username</label><br> -->
+            <input type="text" id="adminName" class="" name="adminName" value="<?=$adminName?>" hidden>
             <br>
-
+<br>
 <!-- company-name -->
-            <label for="">Company Name</label>
+            <label for="">Company Name</label><br>
             <input type="text" id="company-name" class="" name="company-name" value="<?=$companyName?>" required>
             <br>
-
+            <br>
 <!-- company-address -->
-            <label for="">Company Address</label>
+            <label for="">Company Address</label><br>
             <input type="text" id="company-address" class="" name="company-address" value="<?=$companyAddress?>" required>
             <br>
-
-<!-- company-mail -->
-            <label for="">Company E-mail</label>
-            <input type="email" id="company-mail" class="" name="company-mail" value=<?=$adminEmail?> required>
             <br>
-
+<!-- company-mail -->
+            <!-- <label for="">Company E-mail</label><br> -->
+            <input type="email" id="company-mail" class="" name="company-mail" value=<?=$adminEmail?> style="width:auto" hidden>
+            <!-- <br> -->
+            <!-- <br><br> -->
 <!-- submission -->
-            <input type="submit" value="Register" id="submit" class="" name="submit" >
+            <input type="submit" value="Submit" id="submit" class="" name="submit" style="border:2px solid grey;background-color:black;color:white;">
         </form>
     </div>
 </body>
 </html>
+<label for="" style="color:red">!! USERNAME AND EMAIL EDIT NOT AVAILABLE RIGHT NOW !!</label>
 
 <?php
 $msg="";
@@ -64,6 +84,7 @@ if(isset($_POST['submit'])){
     $adminName2=$_REQUEST['adminName'];
     $companyName2=$_REQUEST['company-name'];
     $companyAddress2=$_REQUEST['company-address'];
+    $valid=true;
 
     $adminNamePattern="[^0-9A-Za-z]";
     $adminNamePattern2="[^/A-Za-z0-9]";//actual pattern 
@@ -101,24 +122,24 @@ if(isset($_POST['submit'])){
     }
     if($valid){
         $validBE=true;
-        $query2 = "SELECT * FROM admins WHERE adminName='$adminName2'";
-        $runquery2 = mysqli_query($conn,$query2);
-        if (mysqli_num_rows($runquery2) == 1){
-            $msg.="Username already exists";
-            $validBE=false;
-        }
-        $query4 = "SELECT * FROM admins WHERE companyName='$companyName2'";
-        $runquery4 = mysqli_query($conn,$query4);
-        if (mysqli_num_rows($runquery4) == 1){
-            $msg.="Username already exists";
-            $validBE=false;
-        }
+        // $query2 = "SELECT * FROM admins WHERE adminName='$adminName2'";
+        // $runquery2 = mysqli_query($conn,$query2);
+        // if (mysqli_num_rows($runquery2) == 1){
+        //     $msg.="Username already exists";
+        //     $validBE=false;
+        // }
+        // $query4 = "SELECT * FROM admins WHERE companyName='$companyName2'";
+        // $runquery4 = mysqli_query($conn,$query4);
+        // if (mysqli_num_rows($runquery4) == 1){
+        //     $msg.="Username already exists";
+        //     $validBE=false;
+        // }
 
         if($validBE){
-                $updatequery00="UPDATE admins SET adminName='$adminName2',email='$adminEmail2',companyName='$companyName2',companyAddress='$companyAddress' WHERE adminID=$adminID";
+                $updatequery00="UPDATE admins SET adminName='$adminName2',companyName='$companyName2',companyAddress='$companyAddress2' WHERE adminID=$adminID";
                 $runquery00=mysqli_query($conn,$updatequery00);
                 if($runquery00){
-                    header("location:Admin_home.php");
+                    // header("location:Admin_changeInfo.php");
                 }
         }
     }

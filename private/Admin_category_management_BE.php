@@ -55,9 +55,13 @@ $msg="";
             }
         } 
     }
-
     //tabledata fetch
     $fecthQuery="SELECT * FROM categories WHERE adminID=$adminID and categoryStatus=1";
+    if(isset($_REQUEST['catSearch'])){
+        $csrch=$_REQUEST['search'];
+        // echo $csrch;
+        $fecthQuery="SELECT * FROM categories WHERE adminID=$adminID and categoryStatus=1 and categoryName LIKE '%$csrch%'";
+        // echo "Search result for $csrch";
+    }
     $runFetch=mysqli_query($conn,$fecthQuery);
-    
 ?>

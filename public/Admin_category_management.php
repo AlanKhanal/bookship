@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../private/AdminRegLog.css">
     <style>
+        
         input,textarea{
             border:2px solid black;
             margin-bottom: 20px;
@@ -44,7 +45,10 @@
               </form>
           </div>
           <hr>
-          
+          <form action="" method="POST">
+              <input type="text" name="search" placeholder="Search Category">
+              <input type="submit" name="catSearch" value="SEARCH">
+          </form>
           <table class="table table-striped">
               <thead>
                 <tr style="background:black;color:white;text-align:center">

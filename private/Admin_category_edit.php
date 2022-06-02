@@ -1,18 +1,52 @@
 <?php
 include 'Admin_category_edit_BE.php';
 include 'Admin_category_edit_change.php';
+include 'admin-header-nav.php';
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Edit category</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../private/AdminRegLog.css">
+    <style>
+        .add{
+            margin: 2rem;
+            text-align: center;
+        }
+        input{
+            padding: 2px;
+            font-size: 18px;
+        }
+        label{
+            font-size: 18px;
+        }
+        textarea{
+            padding: 5px;
+        }
+        .everycategory{
+            margin: 2rem;
+        }
+        th{
+            text-align: center;
+        }
+        td{
+            padding-left: 3rem;
+        }
+        td a{
+            text-decoration: none;
+            border: 2px solid grey;
+            padding: 3px 5px;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <div><?=$msg?></div>
     <div class="add">
         <form action="" method="POST">
-            <label for="addcat"><b>EDIT CATEGORY</b></label><br>
+            <label for="addcat" ><b>EDIT CATEGORY</b></label><br>
             <input type="text" id="addcat" name="editedcategoryName" placeholder="Enter Category" value="<?=$categoryName2?>"><br>
             <label for="addcat"><b>Category Description</b></label><br>
             <textarea id="catDesc" name="editedcategoryDesc" placeholder="Category description"cols="45" rows="10" ><?=$catDesc2?></textarea><br>
@@ -22,11 +56,12 @@ include 'Admin_category_edit_change.php';
     </div>
     <hr>
     <div class="everycategory">
+        <h3>CATEGORIES</h3>
         <table>
             <thead>
                 <tr>
-                    <th>Category Name</th>
-                    <th>Category Description</th>
+                    <th>Name</th>
+                    <th>Description</th>
                     <th>Recorded date</th>
                     <th>Manage</th>
                     <!-- <th>Total Product</th> -->
@@ -43,11 +78,11 @@ include 'Admin_category_edit_change.php';
                     ?>
                     <tr>
                         <td><?=$categoryName?></td>
-                        <td><?=$catDesc?></td>
+                        <td><textarea name="" id="" cols="30" rows="2"><?=$catDesc?></textarea></td>
                         <td><?=$updated?></td>
                         <td>
-                            <a href="http://localhost:8081/bookship/private/Admin_category_edit.php?category=<?=$categoryName?>">EDIT</a>
-                            <a href="http://localhost:8081/bookship/private/Admin_category_delete.php?category=<?=$categoryName?>">DELETE</a>
+                            <a href="http://localhost:8081/bookship/private/Admin_category_edit.php?category=<?=$categoryName?>" style="background:blue">EDIT</a>
+                            <a href="http://localhost:8081/bookship/private/Admin_category_delete.php?category=<?=$categoryName?>" style="background:red">DELETE</a>
                         </td>
                         
             <?php   

@@ -63,57 +63,97 @@ if(isset($_REQUEST['productID'])){
             margin:0px 5px;
         }
     </style> -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../private/AdminRegLog.css">
+    <style>
+        #tablr td{
+            text-align: center;
+        }
+        td a{
+            text-decoration: none;
+            border: 2px solid grey;
+            padding: 2px 10px;
+        }
+        input{
+            padding:1px 5px;
+        }
+        textarea{
+            padding:4px;
+        }
+    </style>
 </head>
 <body>
     <div>
-        <h2>Edit Book</h2>
+        <h2 align=center>EDIT BOOK</h2>
     </div>
     <div class="body-separation">
         <div><?=$msg?></div>
-        <div>
-            <form action="" method="POST" enctype="multipart/form-data">
+        <div style="margin:2rem;">
+            <table>
+                <form action="" method="POST" enctype="multipart/form-data">
 
-            <label for="">Book Name:</label>
-            <input type="text" id="" class="" name="productNameEdit" value="<?=$productName?>"><br>
+                <tr>
+                    <td><label for="">Book Name:</label></td>
+                    <td><input type="text" id="" class="" name="productNameEdit" value="<?=$productName?>"></td>
 
-            <label for="">Book Category:</label><br>
-            <!-- SELECT CATEGORY INPUT -->
-            <?php 
-                echo '<select name="productCategoryEdit">';
-                $queryeditcat="SELECT `categoryName` FROM categories where categoryStatus=1 and adminID=$adminID";
-                echo '<option style="background:black;color:blue;">'.$productCat.'</option>';
-                if($runeditcat=mysqli_query($conn,$queryeditcat)){
-                    if(mysqli_num_rows($runeditcat)>0){
-                        while($roweditcat=mysqli_fetch_array($runeditcat)){
-                            echo '<option>'.$roweditcat['categoryName'].'</option>';
+                </tr>
+                <tr>
+                <td>
+                    <label for="">Book Category:</label>
+                </td>
+                <!-- SELECT CATEGORY INPUT -->
+                <td><?php 
+                    echo '<select name="productCategoryEdit">';
+                    $queryeditcat="SELECT `categoryName` FROM categories where categoryStatus=1 and adminID=$adminID";
+                    echo '<option style="background:black;color:blue;">'.$productCat.'</option>';
+                    if($runeditcat=mysqli_query($conn,$queryeditcat)){
+                        if(mysqli_num_rows($runeditcat)>0){
+                            while($roweditcat=mysqli_fetch_array($runeditcat)){
+                                echo '<option>'.$roweditcat['categoryName'].'</option>';
+                            }
                         }
-                    }
-                }   
-            echo '</select>';  //Selection closed       
-            ?><br>
+                    }   
+                echo '</select>';  //Selection closed       
+                ?></td>
+</tr>
+                <tr>
+                    <td><label for="productDesc">Book Description:</label></td>
+                    <td><textarea type="text" rows=8 cols=50 id="productDesc" maxlength="1000" class="" name="productDescEdit"><?=$productDesc?></textarea>
+                    </td>
+                </tr>
 
-            <label for="productDesc">Book Description:</label><br>
-            <textarea type="text" rows=8 cols=50 id="productDesc" maxlength="1000" class="" name="productDescEdit"><?=$productDesc?></textarea><br>
-
-            <label for="productAuthor">Author Name:</label><br>
-            <input type="text" id="productAuthor" class="" name="productAuthorEdit" value="<?=$productAuthor?>"><br>
-
-            <label for="productCost">Book Cost:</label><br>
-            <input type="number" id="productCost" class="" name="productCostEdit" min=1 value="<?=$productCost?>"><br>
-
-            <label for="productImg">Book Image:</label>
-            <input type="file" id="productImg" class="" name="productImgEdit" accept="image/*">
-            <br>Previous:<img src="<?=$pImg?>" alt="" height=50px width=40px><br>
+                <tr>
+                <td><label for="productAuthor">Author Name:</label><br></td>
+                <td><input type="text" id="productAuthor" class="" name="productAuthorEdit" value="<?=$productAuthor?>"><br></td>
+                </tr>
+                <tr>
+                <td><label for="productCost">Book Cost:</label><br></td>
+                <td><input type="number" id="productCost" class="" name="productCostEdit" min=1 value="<?=$productCost?>"><br></td>
+                </tr>
+                <tr>
+                    <td><label for="productImg">Book Image:</label></td>
+                    <td><input type="file" id="productImg" class="" name="productImgEdit" accept="image/*"></td>
+                </tr>
+                <tr>
+                <td><br>Previous:<img src="<?=$pImg?>" alt="" height=50px width=40px><br></td>
+                </tr>
+                <tr>
+                    <td><label for="productQty">Quantity:</label></td>
+                    <td><input type="number" id="productQty" class="" name="productQtyEdit" min=1 value="<?=$productQty?>" ></td>
+                </tr>
+                <tr>
+                <td><label for="pubDate">Published Date</label></td>
+                <td><input type="date" id="pubDate" class="" name="productPublishedEdit" value="<?=$productDate?>"></td>
+                </tr>
                 
-            <label for="productQty">Quantity:</label><br>
-            <input type="number" id="productQty" class="" name="productQtyEdit" min=1 value="<?=$productQty?>" ><br>
-
-            <label for="pubDate">Published Date</label><br>
-            <input type="date" id="pubDate" class="" name="productPublishedEdit" value="<?=$productDate?>"><br>
-                
-            <input type="submit" name="product-edit-submit" >  
-                
-            </form>
+                    
+                <tr>
+                    <td><input type="submit" name="product-edit-submit" >  </td>
+                </tr>
+                    
+                </form>
+            </table>
         </div>
         
 <?php
@@ -234,19 +274,19 @@ if($valid=true){
 <hr>
         <!-- ********************************************DIVISION********************************************* -->
         <div><?=$tablemsg?></div>
-        <div>
+        <div id="tablr">
             <table>
                 <thead>
-                    <tr>
-                        <th>Book Name</th>
-                        <th>Book category</th>
-                        <th>Book Description</th>
-                        <th>Book Cost</th>
-                        <th>Book Image</th>
-                        <th>Product Quantity</th>
-                        <th>Published Date</th>
-                        <th>Management</th>
-                    </tr>
+                <tr class="table-head" width=100% style="background:red;color:white;text-align:center">
+                        <th width=10% scope="col" style="border-right:1px solid black;">Name</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Category</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Description</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Cost</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Image</th>
+                        <th width=10% scope="col" style="border-right:1px solid black;">Quantity</th>
+                        <th width=15% scope="col" style="border-right:1px solid black;">Published On</th>
+                        <th width=15% scope="col" style="border-right:1px solid black;">Management</th>
+                  </tr>
                 </thead>
                 <tbody>
                     <tr>
@@ -270,10 +310,10 @@ if($valid=true){
                         <td><textarea name="" id="" cols="30" rows="2"><?=$productDesc?></textarea></td>
                         <td><?=$productCost?></td>
                         
-                        <td><a href='<?=$productImg?>' target="_blank"><img src='<?=$productImg?>'height='90px' width='70px'></a></td>
+                        <td><a href='<?=$productImg?>' target="_blank" style="border:0px;"><img src='<?=$productImg?>'height='90px' width='70px'></a></td>
                         <td><?=$productQty?></td>
                         <td><?=$published?></td>
-                        <td><a href='http://localhost:8081/bookship/private/Admin_product_edit.php?productID=<?=$ID?>'>[EDIT]</a> <a href='http://localhost:8081/bookship/private/Admin_product_delete.php?deleteID=<?=$ID?>'>[HIDE]</a></td>
+                        <td><a href='http://localhost:8081/bookship/private/Admin_product_edit.php?productID=<?=$ID?>' style="background-color:blue;color:white;">EDIT</a> <a href='http://localhost:8081/bookship/private/Admin_product_delete.php?deleteID=<?=$ID?>' style="background-color:red;color:white;">HIDE</a></td>
                     </tr>
                     <?php
                             } 
