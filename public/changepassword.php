@@ -73,7 +73,7 @@ if(isset($_REQUEST['updatePass'])){
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Profile | </title>
+    <title>Profile | Change Password </title>
     <style>
         *{
             margin:0px;
@@ -140,7 +140,7 @@ if(isset($_REQUEST['updatePass'])){
                 <a href="wishlist.php">My wishlist</a>
             </div>
             <div>
-                <a href="changepassword.php">Change password</a>
+                <a href="profile.php">Change password</a>
             </div>
             <div>
                 <a href="User_logout.php">Logout</a>
@@ -155,7 +155,7 @@ if(isset($_REQUEST['updatePass'])){
                     <table>
                         <form action="" method="POST">
                             <th>
-                                <td><div class="infoInput"><b>Username</b></div></td>
+                                <td><div class="infoInput"><b>CHANGE PASSWORD</b></div></td>
                             </th>
                             <tr>
                                 <td><div class="infoInput">Current password:</div></td>

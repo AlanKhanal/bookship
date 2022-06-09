@@ -1,4 +1,5 @@
 <?php
+$msg="";
 //session
 session_start();
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
@@ -18,7 +19,6 @@ session_start();
     }
 
 //categoryAdd
-$msg="";
     $isvalid=true;
     if(isset($_POST['submit'])){
         $newcat = trim($_POST['categoryName']);
@@ -37,13 +37,14 @@ $msg="";
         }
         //check if category already exist
         $catcheck=strtoupper($newcat);
-        $catadd="SELECT upper(`categoryName`) FROM categories WHERE categoryName='$catcheck' AND adminID=$adminID and categoryStatus=1";
+        $catadd="SELECT upper(`categoryName`) FROM categories WHERE categoryName='$catcheck' AND adminID=$adminID and categoryStatus=1 ";
         $check = mysqli_query($conn, $catadd);
         $catnum = mysqli_num_rows($check);
         if($catnum>0){
             $msg.='Category already Exists.';
             $isvalid=false;
         }
+        
     }
 
     if(isset($_POST['submit'])){
@@ -56,7 +57,7 @@ $msg="";
         } 
     }
     //tabledata fetch
-    $fecthQuery="SELECT * FROM categories WHERE adminID=$adminID and categoryStatus=1";
+    $fecthQuery="SELECT * FROM categories WHERE adminID=$adminID and categoryStatus=1 ORDER BY categoryName";
     if(isset($_REQUEST['catSearch'])){
         $csrch=$_REQUEST['search'];
         // echo $csrch;

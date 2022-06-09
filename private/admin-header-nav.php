@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>Document</title>
         <style>
             *{
                 margin:0px;
@@ -9,8 +8,9 @@
                 font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
             }
-                nav{
+    nav{
     background: cornflowerblue;
+    width: auto;
 }
 
 nav::after{

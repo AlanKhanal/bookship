@@ -26,7 +26,7 @@ if(isset($_REQUEST['sr'])){
 
     }     
     else{
-        $searchQuery="SELECT * FROM products WHERE productStatus=1 and productName LIKE '%$search%'";
+        $searchQuery="SELECT * FROM products WHERE productStatus=1 and productQty>=1 and productName LIKE '%$search%'";
         $runSQ=mysqli_query($conn,$searchQuery);
         // count of result
         $count=mysqli_num_rows($runSQ);

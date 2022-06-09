@@ -19,55 +19,6 @@ session_start();
         $companyAddress=$row['companyAddress'];
     }
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Change Password</title>
-    <style>
-        input{
-            font-size: 16px;
-            padding:2px 10px;
-            border-radius: 5px;
-            border:2px solid grey;
-        }
-        label{
-            font-size: 16px;
-            padding:2px 10px;
-        }
-        #pwchange{
-            text-align: center;
-
-        }
-        #headed{
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-    </style>
-</head>
-<body>
-    <div id="headed"><h1>Change Password</h1></div>
-    <div id="pwchange">
-        <form action="" method="POST">
-            <div>
-                <label for="">Current Password</label><br>
-                <input type="password" name="pass">
-            </div>
-            <br>
-            <div>
-                <label for="">New Password</label><br>
-                <input type="password" name="newPassword">
-                <br>
-                <br>
-                <label for="">Confirm New Password</label><br>
-                <input type="password" name="confNewPassword">
-            </div>
-<br>
-            <input type="submit" value="submit" name="submit" style="border:2px solid grey;background-color:black;color:white;">
-        </form>
-    </div>
-</body>
-</html>
 <?php
 if(isset($_POST['submit'])){
     $password=$_REQUEST['pass'];
@@ -108,7 +59,7 @@ if(isset($_POST['submit'])){
         $runsearchQuery=mysqli_query($conn,$searchQuery);
         if(password_verify($password,$row['password'])){
             if(mysqli_num_rows($runsearchQuery)==1){
-                $hashed = password_hash($password, PASSWORD_DEFAULT);
+                $hashed = password_hash($confnewPassword, PASSWORD_DEFAULT);
                 $update="UPDATE admins SET `password`='$hashed' WHERE adminID=$adminID";
                 $run2=mysqli_query($conn,$update);
                 if($run2){
@@ -125,3 +76,53 @@ if(isset($_POST['submit'])){
 }
 }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Change Password</title>
+    <style>
+        body{
+            background-color:rgb(202, 205, 212);
+        }
+        input{
+            font-size: 16px;
+            padding:2px 10px;
+            border-radius: 5px;
+            border:2px solid grey;
+        }
+        label{
+            font-size: 16px;
+            padding:2px 10px;
+        }
+        #pwchange{
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body>
+    <div style="margin:0.5rem 2rem">
+        <h1 style="font-family:Georgia, 'Times New Roman', Times, serif">CHANGE PASSWORD</h1>
+        <hr style="border-bottom:1px solid white">
+    </div>
+    <div id="pwchange">
+        <form action="" method="POST">
+            <div>
+                <label for="">Current Password</label><br>
+                <input type="password" name="pass">
+            </div>
+            <br>
+            <div>
+                <label for="">New Password</label><br>
+                <input type="password" name="newPassword">
+                <br>
+                <br>
+                <label for="">Confirm New Password</label><br>
+                <input type="password" name="confNewPassword">
+            </div>
+<br>
+            <input type="submit" value="submit" name="submit" style="border:2px solid grey;background-color:black;color:white;">
+        </form>
+    </div>
+</body>
+</html>

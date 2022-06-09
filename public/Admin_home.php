@@ -1,6 +1,5 @@
 <?php
     include ('../private/dbconnect.php');
-    include('../private/admin-header-nav.php');
     session_start();
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
     {
@@ -17,29 +16,63 @@
         $companyName=$row['companyName'];
         $companyAddress=$row['companyAddress'];
     }
-
+    include('../private/admin-header-nav.php');
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Admin Home | Bookship</title>
     <style>
-        .info{
-            padding-left: 5rem;
+        .subParts,.parts{
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
-        div{
-            padding:20px;
-            font-size: 24px;
+        .heads{
+            border: 2px solid cornflowerblue;
+            border-radius: 5px;
+            padding:1rem;
+            margin:1rem;
+            text-decoration: none;
+            background-color: cornflowerblue;
+            color:white;
+            font-weight: 600;
+        }
+        .heads:hover{
+            transform: scaleY(1.1);
+        }
+        .parts a{
+            text-decoration: none;
+        }
+        hr{
+            margin:0.5rem 1rem;
         }
     </style>
 </head>
 <body>
-    <!-- <a href="../private/Admin-logout.php">Logout</a> -->
-    <div class="info">
-        <div><b>Company Name:</b><?=$companyName?></div>
-        <div><b>Admin Name:</b><?=$adminName?></div>
-        <div><b>Location:</b><?=$companyAddress?></div>
-        <div><b>E-mail:</b><?=$adminEmail?></div>
+    <div class="parts">
+        <div class="subParts">
+           <a href=""><div class="heads" id="cat">MANAGE CATEGORY</div></a>
+            <a href=""><div class="heads" id="prod">MANAGE PRODUCT</div></a>
+        </div>
+        <div class="subParts">
+            <a href="Admin_placedbooks.php"><div class="heads" id="placed">ORDERS RECEIVED</div></a>
+            <a href="Admin_shippedbooks.php"><div class="heads" id="ship">ORDERS SHIPPED</div></a>
+            <!-- <a href="Admin_placedbooks.php"><div class="heads" id="placed">ORDERS CANCELLED</div></a>
+            <a href="Admin_shippedbooks.php"><div class="heads" id="ship">ORDERS DELIVERED</div></a> -->
+        </div>
+    </div>
+    <hr>
+    <!-- SALES -->
+    <div class="dashboard">
+        <div class="sales">
+            <div></div>
+            <div></div>
+        </div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
 </body>
 </html>

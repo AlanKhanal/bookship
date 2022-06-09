@@ -1,15 +1,15 @@
 <?php
-            if(isset($_REQUEST['searchSub'])){
-                $sr=trim($_REQUEST['searchTxt']);
-                $valid=true;
-                if($sr==""){
+    if(isset($_REQUEST['searchSub'])){
+        $sr=trim($_REQUEST['searchTxt']);
+        $valid=true;
+        if($sr==""){
 
-                }
-                else{
-                    header("location:../public/User_search.php?sr=$sr");
-                }
-            }
-            ?>
+        }
+        else{
+            header("location:../public/User_search.php?sr=$sr");
+        }
+    }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,13 +20,13 @@
         }
         .w-body{
             background-color: #ff3333;
-            width: auto;
+            width: 100%;
         }
         .w-body input,.w-body{
             font-size: 22px;
         }
         .w-body div{
-            padding: 0px 1%;
+            padding: 0px 0%;
         }
         .nav1{
             text-align: center;
@@ -51,7 +51,7 @@
         }
         .nav2{
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
         }
         .search{
             padding:0px;
@@ -68,11 +68,14 @@
             font-size: 22px;
         }
         .nav1-1 div{
-            padding-right:20px;
+            padding-right:1rem;
         }
         .icon img:hover{
             /* width:37px; */
             transform: scaleX(1.1);
+        }
+        .home,.cat{
+            padding-left:1rem;
         }
     </style>
 </head>
@@ -100,7 +103,7 @@
                     <div><a href="../public/User_home.php">Home</a></div>
                 </div>
                 <div class="cat">
-                    <div id="catHead" onclick="catHide()" id="" style="cursor:pointer;color:white;">Categories</div>
+                    <div id="catHead" onclick="catHide()" style="cursor:pointer;color:white;">Categories</div>
                     <script>
                         function catHide(){
                             var x = document.getElementById("catList");
@@ -112,7 +115,7 @@
                         }
                     </script>
                     <div id="catList" style="font-size:18px;position:fixed;" hidden>
-                    <table style="border:1px solid #ff3333;padding:4px 8px;background-color:#ff3333;color:white">
+                    <table style="border:1px solid red;padding:4px 8px;background-color:#ff3333;color:white">
                         <?php
                         $getCats="SELECT * FROM categories WHERE categoryStatus=1";
                         $runGet29=mysqli_query($conn,$getCats);

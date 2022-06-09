@@ -36,40 +36,51 @@
     </style>
 </head>
 <body>
-    <div align=center><h2>Category Management</h2></div>
+    <div style="margin-left: 2rem;"><h2 style="font-family:Georgia, 'Times New Roman', Times, serif;">ADVANCE CATEGORY MANAGEMENT</h2></div>
+    <div style="margin-left:4rem"><p style="font-family:Georgia, 'Times New Roman', Times, serif;"><b style="font-family:Georgia, 'Times New Roman', Times, serif;">UNHIDE OR DELETE YOUR CATEGORY PERMANENTLY. <br> Note:</b> The products under the category here aren't displayed to customers. <br> If category is permanently deleted, products under the category will be deleted as well.</p></div>
+
     <br>
     <div align=center>
-        <table align=center>
-            <thead>
-                <tr align="center">
-                    <th style="border-right:1px solid white">Book Name</th>
-                    <th style="border-right:1px solid white">Book Description</th>
-                    <th style="border-right:1px solid white">Manage</th>
+    <table class="table table-striped table-dark">
+              <thead>
+                <tr style="background:black;color:white;text-align:center;border-top:2px solid white;">
+                  <th style="background:black;color:white;text-align:center">NAME</th>
+                  <th style="background:black;color:white;text-align:center">DESCRIPTION</th>
+                  <th style="background:black;color:white;text-align:center">RECORDED ON</th>
+                  <th style="background:black;color:white;text-align:center">MANAGE</th>
                 </tr>
-            </thead>
-            <tbody>
-                    <?php
-                        $query2="SELECT * FROM categories WHERE adminID=$adminID and categoryStatus=0";
-                        $run2=mysqli_query($conn,$query2);
-                        if (mysqli_num_rows($run2) > 0){
-                        while($row2 = mysqli_fetch_array($run2)){
-                            $ID=$row2['categoryID'];
-                            $categoryName=$row2['categoryName'];
-                            $categoryDesc=$row2['categoryDesc'];
-                        }
-                    }
-                        else{
-                            die('0 HIDDEN category.') ;
-                        }
+              </thead>
+
+            <?php
+            $runFetch=mysqli_query($conn,"SELECT * FROM categories where categoryStatus=0");
+            ?>
+            <tbody><?php
+            if (mysqli_num_rows($runFetch) > 0){
+        // output data of each row
+        while($row = mysqli_fetch_assoc($runFetch)) {
+                    $categoryID=$row['categoryID'];
+                    $categoryName=$row["categoryName"];
+                    $catDesc=$row["categoryDesc"];
+                    $updated=$row["UpdateDate"];
+                    // $catId=$row["categoryID"];
                     ?>
-                <tr>
-                        <td><b><?=$categoryName?></b></td>
-                        <td><textarea name="" id="" cols="20" rows="2"><?=$categoryDesc?></textarea></td>
-                        <td>
-                            <button class="btn btn-primary"><a href="http://localhost:8081/bookship/private/Admin_category_unhide.php?categoryID=<?=$ID?>" class="text-light">UNHIDE</a></button>
-                            <button class="btn btn-danger"><a href="http://localhost:8081/bookship/private/Admin_category_permDelete.php?deleteID=<?=$ID?>" class="text-light">DELETE</a></button>
-                        </td>
-                </tr>
+                    <tr>
+                        <td style="text-align:center;"><b><?=$categoryName?></b></td>
+                        <td style="text-align:center;"><textarea name="" id="" cols="50" rows="2"><?=$catDesc?></textarea></td>
+                        <td style="text-align:center;"><?=$updated?></td>
+                        <td style="text-align:center;">
+                        <button class="btn btn-primary" style="font-weight:600" ><a href="http://localhost:8081/bookship/private/Admin_category_unhide.php?categoryID=<?=$categoryID?>" style="text-decoration:none;color:white">UNHIDE</a></button>
+                        <button class="btn btn-danger" style="font-weight:600"><a href="http://localhost:8081/bookship/private/Admin_category_permDelete.php?deleteID=<?=$categoryID?>" style="text-decoration:none;color:white">DELETE</a></button>
+                        </td style="text-align:center">
+                        
+            <?php   
+                }
+            } 
+            else {
+                echo "No data in table.";
+            }
+            ?>
+                    </tr>  
             </tbody>
         </table>
     </div>

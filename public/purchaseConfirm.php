@@ -49,8 +49,8 @@ if($runc2o){
             $infoInsert=mysqli_query($conn,"UPDATE orders SET customer='$cusName',`mail`='$cusmail',`phno`='$cusph',`state`='$cusstate',`city`='$cuscity',`street`='$cusstreet',`hono`='$cushono',`method`='$cusmethod',`postC`='$cuspostC' WHERE uniqueorder='$uqord' and userID=$userID");
             if($infoInsert){
                 // $dltqty=mysqli_query($conn,"UPDATE products SET productQty=");
-                mysqli_query($conn,"DELETE FROM cart");
-                header("location:orders.php");
+                // mysqli_query($conn,"DELETE FROM cart");
+                // header("location:orders.php");
             }
         }
         else{
@@ -59,31 +59,62 @@ if($runc2o){
         
     }
 }
-$getpro=mysqli_query($conn,"SELECT * FROM products WHERE productStatus=1");
-if($getpro){
-    if(($totRows=mysqli_num_rows($getpro)) > 0){
-        while($Row32=mysqli_fetch_array($getpro)){
-            $id=$Row32['productID'];
-            $pqty=$Row32['productQty'];
-            // in orders
-            $getord=mysqli_query($conn,"SELECT distinct(productID) FROM orders WHERE productID=$id and userID=1");
-            if($getord){
-                if($totords=mysqli_num_rows($getord)>0){
-                    while($Row33=mysqli_fetch_array($getord)){
-                        $oid=$Row33['productID'];
-
-                        $query34 = "SELECT * FROM orders WHERE userID=1 and productID=$oid";
-                        $query_run = mysqli_query($conn,$query34);
-                        $qty= 0;
-                        while ($num = mysqli_fetch_assoc ($query_run)) {
-                            $qty += $num['qty'];
-                        }
-                        // echo "$id has =".$qty." quantity<br>";
-                        $update=mysqli_query($conn,"UPDATE products SET productQty=$pqty-$qty WHERE productID=$id");
+$getcartQty=mysqli_query($conn,"SELECT * FROM cart WHERE userID=$userID");
+    while($datas=mysqli_fetch_assoc($getcartQty)){
+        $productId=$datas['productID'];
+        $bQty=$datas['qty'];
+        
+        $getpQty=mysqli_query($conn,"SELECT * FROM products WHERE productID=$productId");
+        while($datas2=mysqli_fetch_assoc($getpQty)){
+            $productquan=$datas2['productQty'];
+            if($productquan>=1){
+                $decrease=mysqli_query($conn,"UPDATE products SET productQty=productQty-$bQty WHERE productID=$productId");
+                if($decrease){
+                    $emptyCart=mysqli_query($conn,"DELETE FROM cart WHERE userID=$userID");
+                    $emptycustInfo=mysqli_query($conn,"DELETE FROM customerinfo WHERE userID=$userID");
+                    header("location:orderSummary.php?id=$uqord");
                 }
             }
-        }
     }
 }
-}
+// $connect2=mysqli_query($conn,"SELECT orders.productID,orders.qty,products.productQty
+// FROM orders 
+// INNER JOIN products
+// ON orders.productID = products.productID WHERE productID='';");
+// if(($totRows=mysqli_num_rows($connect2)) > 0){
+//             while($Row32=mysqli_fetch_array($connect2)){
+//                 echo $pId=$Row32['productID'];
+//                 echo $pQty=$Row32['productQty'];
+//                 echo $oQty=$Row32['qty'];
+
+//                 $update=mysqli_query($conn,"UPDATE products SET productQty=$pQty-$oQty WHERE productID=$id");
+//             }
+//         }
+// $getpro=mysqli_query($conn,"SELECT * FROM products WHERE productStatus=1");
+// if($getpro){
+//     if(($totRows=mysqli_num_rows($getpro)) > 0){
+//         while($Row32=mysqli_fetch_array($getpro)){
+//             $id=$Row32['productID'];
+//             $pqty=$Row32['productQty'];
+//             // in orders
+//             $getord=mysqli_query($conn,"SELECT distinct(productID) FROM orders WHERE productID=$id and userID=1");
+//             if($getord){
+//                 if($totords=mysqli_num_rows($getord)>0){
+//                     while($Row33=mysqli_fetch_array($getord)){
+//                         $oid=$Row33['productID'];
+
+//                         $query34 = "SELECT * FROM orders WHERE userID=1 and productID=$oid";
+//                         $query_run = mysqli_query($conn,$query34);
+//                             $num = mysqli_fetch_assoc ($query_run);
+                             
+//                             $qty32= $num['qty'];
+                        
+//                         // echo "$id has =".$qty." quantity<br>";
+//                         $update=mysqli_query($conn,"UPDATE products SET productQty=$pqty-$qty WHERE productID=$id");
+//                 }
+//             }
+//         }
+//     }
+// }
+// }
 ?>

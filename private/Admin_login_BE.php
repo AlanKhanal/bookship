@@ -42,20 +42,26 @@ if(isset($_POST['submit'])){
             if($num==1){
                 while($row=mysqli_fetch_assoc($result)){
                     if(password_verify($password,$row['password'])){
+                        $uqid=$row['uniqueadmin'];
+                        $adminID=$row['adminID'];
                         session_start();
                         $_SESSION['loggedIn']=true;
                         // $login=true;
                         
+                        $_SESSION["uniqueadmin"] = $uqid;
                         $_SESSION["adminName"] = $adminName;
                         $_SESSION["loggedin"] = true;
                         $_SESSION["adminID"]=$adminID;
                         $adminID=$row['adminID'];
                         header("location:../public/Admin_home.php");
                     }    
+                    else{
+                        $msg.="Password didn't matched.";
+                    }
                 }
             }
             else{
-                $msg.="Username and Password did not matched";
+                $msg.="Username not found.";
             }
     }
     //     $adminCheck="SELECT * FROM admins WHERE `adminName`='$adminName' AND `password`='$password' AND `emailVerification`=1 AND `adminStatus`=1";

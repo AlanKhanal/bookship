@@ -18,7 +18,7 @@ session_start();
         $adminID=$row['adminID'];
     }
 
-    $query022="UPDATE categories SET categoryStatus=1 WHERE adminID=$adminID AND categoryID=$categoryIDedit";
+    $query022="UPDATE categories SET categoryStatus=1 WHERE categoryID=$categoryIDedit";
     $run022=mysqli_query($conn,$query022);
     if($run022){
         header('location:../private/Admin_moreManagementCat.php');

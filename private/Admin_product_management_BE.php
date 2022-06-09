@@ -1,4 +1,8 @@
 <?php
+$checkcat=mysqli_query($conn,"SELECT * FROM categories WHERE categoryStatus=1");
+if(mysqli_num_rows($checkcat)==0){
+    header("location:../public/Admin_category_management.php?cat=null");
+}
 if(isset($_REQUEST['product-submit'])){
     $valid=true;
     $msg="";

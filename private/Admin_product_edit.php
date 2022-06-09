@@ -27,7 +27,13 @@ include '../private/Admin_product_management_BE.php';
 
 if(isset($_REQUEST['productID'])){
     $productIDedit=$_REQUEST['productID'];
-    
+
+    if($productIDedit!=is_numeric($productIDedit)){
+        header("location:../public/Admin_product_management.php");
+    }
+}
+else{
+    header("location:../public/Admin_product_management.php");
 }
 ?>
 
@@ -49,7 +55,7 @@ if(isset($_REQUEST['productID'])){
         }
     }
     else{
-        $tablemsg='No data';
+        header("location:../public/Admin_product_management.php");
     }
 ?>
 <!DOCTYPE html>
@@ -67,95 +73,111 @@ if(isset($_REQUEST['productID'])){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../private/AdminRegLog.css">
     <style>
-        #tablr td{
-            text-align: center;
+        .container label{
+            font-weight: 600;
+
         }
-        td a{
+        .container input,textarea,select{
+            border:2px solid black;
+            margin-bottom: 1rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 7px;
+            width: 72%;
+        }
+        .container td a{
             text-decoration: none;
-            border: 2px solid grey;
-            padding: 2px 10px;
+            color:white;
         }
-        input{
-            padding:1px 5px;
+        .container td a:hover{
+            color:gray;
         }
-        textarea{
-            padding:4px;
+        .container td textarea{
+            border: 1px solid white;
+            background-color:beige;
+            color:gray;
+        }
+        .container .submit:hover{
+            transform: scaleX(1.1);
+        }
+        .container .submit{
+            padding: 0.2rem;
+            border: 2px solid white;
+            background-color: #212529;
+            color:white;
+            font-weight: 600;
+            padding:0.4rem 0.5rem;
+            width: 100%;
+        }
+        .prtable{
+            width:100%;
+        }
+        .prtable td{
+            width:auto;
         }
     </style>
 </head>
 <body>
-    <div>
-        <h2 align=center>EDIT BOOK</h2>
-    </div>
-    <div class="body-separation">
-        <div><?=$msg?></div>
-        <div style="margin:2rem;">
+<h2 style="margin-left:2rem;font-family:Georgia, 'Times New Roman', Times, serif">UPDATE BOOK</h2>
+     <div class="container">
+        <div class="add">
+            <form action="" method="POST" enctype="multipart/form-data">
             <table>
-                <form action="" method="POST" enctype="multipart/form-data">
-
                 <tr>
-                    <td><label for="">Book Name:</label></td>
+                    <td><label for="">NAME:</label></td>
                     <td><input type="text" id="" class="" name="productNameEdit" value="<?=$productName?>"></td>
-
+                    <td><label for="productCost">PRICE:</label></td>
+                    <td><input type="number" id="productCost" class="" name="productCostEdit" min=1 value=<?=$productCost?>></td>
                 </tr>
-                <tr>
-                <td>
-                    <label for="">Book Category:</label>
-                </td>
                 <!-- SELECT CATEGORY INPUT -->
-                <td><?php 
-                    echo '<select name="productCategoryEdit">';
-                    $queryeditcat="SELECT `categoryName` FROM categories where categoryStatus=1 and adminID=$adminID";
-                    echo '<option style="background:black;color:blue;">'.$productCat.'</option>';
-                    if($runeditcat=mysqli_query($conn,$queryeditcat)){
-                        if(mysqli_num_rows($runeditcat)>0){
-                            while($roweditcat=mysqli_fetch_array($runeditcat)){
-                                echo '<option>'.$roweditcat['categoryName'].'</option>';
-                            }
-                        }
-                    }   
-                echo '</select>';  //Selection closed       
-                ?></td>
-</tr>
-                <tr>
-                    <td><label for="productDesc">Book Description:</label></td>
-                    <td><textarea type="text" rows=8 cols=50 id="productDesc" maxlength="1000" class="" name="productDescEdit"><?=$productDesc?></textarea>
-                    </td>
-                </tr>
 
+               <tr>
+               <td><label for="productAuthor">AUTHOR:</label></td>
+                    <td><input type="text" id="productAuthor" class="" name="productAuthorEdit" value="<?=$productAuthor?>"><br></td>
+                   <td><label for="">CATEGORY:</label></td>
+                    <td>
+                        <?php 
+                        echo '<select name="productCategoryEdit">';
+                            $query="SELECT `categoryName` FROM categories where categoryStatus=1 ORDER BY categoryName asc";
+                            echo '<option>'.$productCat.'</option>';
+                            if($run=mysqli_query($conn,$query)){
+                            if(mysqli_num_rows($run)>0){
+                                while($row=mysqli_fetch_array($run)){
+                                    echo '<option>'.$row['categoryName'].'</option>';//category options 
+                                }
+                            }
+                        }     
+                        echo '</select>';  //Selection closed       
+                        ?>
+                    </td>
+                </tr>    
                 <tr>
-                <td><label for="productAuthor">Author Name:</label><br></td>
-                <td><input type="text" id="productAuthor" class="" name="productAuthorEdit" value="<?=$productAuthor?>"><br></td>
+                    <td><label for="productQty">QUANTITY:</label></td>
+                    <td><input type="number" id="productQty" class="" name="productQtyEdit" min=1 value=<?=$productQty?>></td>
+
+                    <td><label for="pubDate">PUBLISHED ON: </label></td>
+                    <td><input type="date" id="pubDate" class="" name="productPublishedEdit" value="<?=$productDate?>"></td>
                 </tr>
                 <tr>
-                <td><label for="productCost">Book Cost:</label><br></td>
-                <td><input type="number" id="productCost" class="" name="productCostEdit" min=1 value="<?=$productCost?>"><br></td>
+                    <td><label for="productImg">IMAGE:</label></td>
+                    <td><input type="file" id="productImg" class="imageClass" name="productImgEdit" accept="image/*" style="border:none"></td>
                 </tr>
                 <tr>
-                    <td><label for="productImg">Book Image:</label></td>
-                    <td><input type="file" id="productImg" class="" name="productImgEdit" accept="image/*"></td>
+                    <td><label><i>previous image:</i></label></td><td><img src="<?=$pImg?>" alt="" height=50px width=40px><br></td>
                 </tr>
                 <tr>
-                <td><br>Previous:<img src="<?=$pImg?>" alt="" height=50px width=40px><br></td>
+                    <td> <label for="productDesc">DESCRIPTION:</label></td>
+                    <td colspan="3"><textarea type="text" rows=3 cols="" id="productDesc" maxlength="1000" class="" name="productDescEdit" style="border:2px solid black;background:white;"><?=$productDesc?></textarea></td>
+                </tr>  
+                <tr>
+                    <td><input type="submit" name="product-edit-submit" class="submit" value="UPDATE"> </td> 
                 </tr>
                 <tr>
-                    <td><label for="productQty">Quantity:</label></td>
-                    <td><input type="number" id="productQty" class="" name="productQtyEdit" min=1 value="<?=$productQty?>" ></td>
+                <div><?=$msg?></div>
                 </tr>
-                <tr>
-                <td><label for="pubDate">Published Date</label></td>
-                <td><input type="date" id="pubDate" class="" name="productPublishedEdit" value="<?=$productDate?>"></td>
-                </tr>
-                
-                    
-                <tr>
-                    <td><input type="submit" name="product-edit-submit" >  </td>
-                </tr>
-                    
-                </form>
-            </table>
+            </table> 
+            </form>
         </div>
-        
+     </div>
 <?php
 
 $valid=true;
@@ -265,7 +287,7 @@ if($valid=true){
         WHERE `productID`=$productIDedit AND adminID=$adminID";
         $productsql = mysqli_query($conn,$prdtsql);
         if($productsql){
-            echo "Successfully edited.";
+            echo "<b><i style='color:blue;margin:0rem 2rem;'>Successfully edited.</i></b>";
         } 
      
 }
@@ -273,25 +295,45 @@ if($valid=true){
 ?>
 <hr>
         <!-- ********************************************DIVISION********************************************* -->
+        <div style="display:flex;justify-content:space-between;margin:0rem 2rem;">
+            <div><h2 align=center style="font-family:Georgia, 'Times New Roman', Times, serif">BOOKS</h2></div>
+            <form action="" method="POST">
+              <input type="text" name="search" placeholder="Search Category">
+              <input type="submit" name="prdSearch" value="SEARCH" style="background-color:#212529;color:white;border:2px solid white;font-weight:600;padding:0.rem 0.4rem;border-radius:5px">
+          </form>
+            <!-- <div>
+                <form action="" method="POST">
+                    <input type="search" name="search">
+                    <input type="submit" name="search" value="SEARCH">
+                </form>
+            </div> -->
+        </div>
         <div><?=$tablemsg?></div>
-        <div id="tablr">
-            <table>
+        <div class="prtable">
+            <table class="table table-striped table-dark" width=auto style="font-size:1rem;">
                 <thead>
-                <tr class="table-head" width=100% style="background:red;color:white;text-align:center">
-                        <th width=10% scope="col" style="border-right:1px solid black;">Name</th>
-                        <th width=10% scope="col" style="border-right:1px solid black;">Category</th>
-                        <th width=10% scope="col" style="border-right:1px solid black;">Description</th>
-                        <th width=10% scope="col" style="border-right:1px solid black;">Cost</th>
-                        <th width=10% scope="col" style="border-right:1px solid black;">Image</th>
-                        <th width=10% scope="col" style="border-right:1px solid black;">Quantity</th>
-                        <th width=15% scope="col" style="border-right:1px solid black;">Published On</th>
-                        <th width=15% scope="col" style="border-right:1px solid black;">Management</th>
+                <tr style="background:black;color:white;text-align:center;border-top:2px solid white;">
+                        <th style="background:black;color:white;text-align:center">Name</th>
+                        <th style="background:black;color:white;text-align:center">Category</th>
+                        <th style="background:black;color:white;text-align:center">Desc</th>
+                        <th style="background:black;color:white;text-align:center">Cost</th>
+                        <th style="background:black;color:white;text-align:center">Image</th>
+                        <th style="background:black;color:white;text-align:center">Qty</th>
+                        <th style="background:black;color:white;text-align:center">Date</th>
+                        <th style="background:black;color:white;text-align:center">Option</th>
                   </tr>
                 </thead>
+
+
                 <tbody>
-                    <tr>
                     <?php
-                        $queryTable="SELECT * FROM products WHERE adminID=$adminID GROUP BY productPublished desc";
+                        $queryTable="SELECT * FROM products WHERE adminID=$adminID and productStatus=1 ORDER BY productPublished desc";
+                        if(isset($_REQUEST['prdSearch'])){
+                            $csrch=$_REQUEST['search'];
+                            // echo $csrch;
+                            $queryTable="SELECT * FROM products WHERE adminID=$adminID and productStatus=1 and productName LIKE '%$csrch%' ORDER BY productPublished desc";
+                            // echo "Search result for $csrch";
+                        }
                         $runTable=mysqli_query($conn,$queryTable);
                         while ($row = mysqli_fetch_array($runTable)){
                             $ID=$row['productID'];
@@ -304,23 +346,32 @@ if($valid=true){
                             $productAuthor=$row['productAuthor'];
                             $published=$row['productPublished'];
                     ?>
+
+
                     <tr>
+                        <!-- <th scope="row"></th> -->
                         <td><b><?=$productName?></b><br><br><div align=left><i>By <?=$productAuthor?></i><div></td>
                         <td><?=$productCat?></td>
-                        <td><textarea name="" id="" cols="30" rows="2"><?=$productDesc?></textarea></td>
-                        <td><?=$productCost?></td>
+                        <td><textarea name="" id="" cols="20" rows="2"><?=$productDesc?></textarea></td>
                         
-                        <td><a href='<?=$productImg?>' target="_blank" style="border:0px;"><img src='<?=$productImg?>'height='90px' width='70px'></a></td>
+                        <td>NPR.<?=$productCost?></td>
+                        <td><a href='<?=$productImg?>' target="_blank"><img src='<?=$productImg?>'height='90px' width='70px'></a></td>
                         <td><?=$productQty?></td>
                         <td><?=$published?></td>
-                        <td><a href='http://localhost:8081/bookship/private/Admin_product_edit.php?productID=<?=$ID?>' style="background-color:blue;color:white;">EDIT</a> <a href='http://localhost:8081/bookship/private/Admin_product_delete.php?deleteID=<?=$ID?>' style="background-color:red;color:white;">HIDE</a></td>
+                        <td>
+                            <button class="btn btn-primary"><a href="http://localhost:8081/bookship/private/Admin_product_edit.php?productID=<?=$ID?>" class="text-light">EDIT</a></button>
+                            <button class="btn btn-danger"><a href="http://localhost:8081/bookship/private/Admin_product_delete.php?deleteID=<?=$ID?>" class="text-light">HIDE</a></button>
+                        </td>
                     </tr>
-                    <?php
+                    <!-- <?php
                             } 
-                    ?>
+                    ?> -->
                 </tbody>
             </table>
         </div>
     </div>
 </body>
 </html>
+<?php
+include '../private/Admin_product_management_BE.php';
+?>

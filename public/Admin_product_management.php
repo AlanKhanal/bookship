@@ -45,49 +45,75 @@ include '../private/Admin_product_management_BE.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../private/AdminRegLog.css">
     <style>
-        label{
-            font-weight: bold;
+        /* th,td{
+            border: 2px solid #212529;
+        } */
+    /* .add{
+        margin:0rem 1rem;
+    } */
+        .container label{
+            font-weight: 600;
+
         }
-        label,input,textarea{
-            font-size: 14px;
-        }
-        input,textarea{
+        .container input,textarea,select{
             border:2px solid black;
-            margin-bottom: 10px;
-            padding-left: 5px;
-            padding-right: 5px;
+            margin-bottom: 1rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 7px;
+            width: 72%;
         }
-        td a{
+        .container td a{
             text-decoration: none;
             color:white;
         }
-        td a:hover{
+        .container td a:hover{
             color:gray;
         }
-        td textarea{
+        .container td textarea{
             border: 1px solid white;
             background-color:beige;
             color:gray;
         }
-        .container{
-            text-align: start;
+        .container .submit:hover{
+            transform: scaleX(1.1);
+        }
+        .container .submit{
+            padding: 0.2rem;
+            border: 2px solid white;
+            background-color: #212529;
+            color:white;
+            font-weight: 600;
+            padding:0.4rem 0.5rem;
+            width: 100%;
+        }
+        .prtable{
+            width:100%;
+        }
+        .prtable td{
+            width:auto;
         }
     </style>
 </head>
 <body>
+<h2 style="margin-left:2rem;font-family:Georgia, 'Times New Roman', Times, serif">ADD BOOK</h2>
      <div class="container">
-         <h2>ADD BOOK</h2>
-        <div><?=$msg?></div>
         <div class="add">
             <form action="" method="POST" enctype="multipart/form-data">
             <table>
                 <tr>
-                    <td><label for="">Book Name:</label></td>
+                    <td><label for="">NAME:</label></td>
                     <td><input type="text" id="" class="" name="productName"></td>
+                    <td><label for="productCost">PRICE:</label></td>
+                    <td><input type="number" id="productCost" class="" name="productCost" min=1 value=1></td>
                 </tr>
-                <tr>
-                    <td><label for="">Book Category:</label></td>
-                    <td><?php 
+                <!-- SELECT CATEGORY INPUT -->
+
+               <tr>
+               <td><label for="productAuthor">AUTHOR:</label></td>
+                    <td><input type="text" id="productAuthor" class="" name="productAuthor" ><br></td>
+                   <td><label for="">CATEGORY:</label></td>
+                    <td>
+                        <?php 
                         echo '<select name="productCategory">';
                             $query="SELECT `categoryName` FROM categories where categoryStatus=1 ORDER BY categoryName asc";
                             echo '<option>Select Category</option>';
@@ -99,50 +125,41 @@ include '../private/Admin_product_management_BE.php';
                             }
                         }     
                         echo '</select>';  //Selection closed       
-                        ?></td>
-                </tr>
-                <!-- SELECT CATEGORY INPUT -->
-
-               <tr>
-                   <td> <label for="productDesc">Book Description:</label></td>
-                   <td><textarea type="text" rows=5 cols=50 id="productDesc" maxlength="1000" class="" name="productDesc" style="border:2px solid black;background:white"></textarea></td>
-               </tr>
-               <tr>
-                    <td><label for="productAuthor">Author Name:</label></td>
-                    <td><input type="text" id="productAuthor" class="" name="productAuthor" ><br></td>
-               </tr>         
-
+                        ?>
+                    </td>
+                </tr>    
                 <tr>
-                    <td><label for="productCost">Book Cost:</label></td>
-                    <td><input type="number" id="productCost" class="" name="productCost" min=1 value=1><br></td>
-                </tr>
-
-                <tr>
-                    <td><label for="productImg">Book Image:</label></td>
-                    <td><input type="file" id="productImg" class="" name="productImg" accept="image/*" style="border:none"></td>
-                </tr>
-                    
-                <tr>
-                    <td><label for="productQty">Quantity:</label></td>
+                    <td><label for="productQty">QUANTITY:</label></td>
                     <td><input type="number" id="productQty" class="" name="productQty" min=1 value=1 ></td>
-                </tr>
 
-                <tr>
-                <td><label for="pubDate">Published Date</label></td>
-                <td><input type="date" id="pubDate" class="" name="productPublished"></td>
+                    <td><label for="pubDate">PUBLISHED ON: </label></td>
+                    <td><input type="date" id="pubDate" class="" name="productPublished"></td>
                 </tr>
-                    
-                <td><input type="submit" name="product-submit"> </td> 
+                <tr>
+                    <td><label for="productImg">IMAGE:</label></td>
+                    <td><input type="file" id="productImg" class="imageClass" name="productImg" accept="image/*" style="border:none"></td>
+                </tr>
+                <tr>
+                    <td> <label for="productDesc">DESCRIPTION:</label></td>
+                    <td colspan="3"><textarea type="text" rows=3 cols="" id="productDesc" maxlength="1000" class="" name="productDesc" style="border:2px solid black;background:white;"></textarea></td>
+                </tr>  
+                <tr>
+                    <td><input type="submit" name="product-submit" class="submit" value="ADD BOOK"> </td> 
+                </tr>
+                <tr>
+                <div><?=$msg?></div>
+                </tr>
             </table> 
             </form>
         </div>
+     </div>
         <hr>
         <!-- ********************************************DIVISION********************************************* -->
-        <div style="display:flex;justify-content:space-between">
-            <div><h2 align=center>BOOK</h2></div>
+        <div style="display:flex;justify-content:space-between;margin:0rem 2rem;">
+            <div><h2 align=center style="font-family:Georgia, 'Times New Roman', Times, serif">BOOK</h2></div>
             <form action="" method="POST">
-              <input type="text" name="search" placeholder="Search Category">
-              <input type="submit" name="prdSearch" value="SEARCH">
+              <input type="text" name="search" placeholder="Search Category" style="border:2px solid black;border-radius:5px;padding:0.1rem;">
+              <input type="submit" name="prdSearch" value="SEARCH" style="background-color:#212529;color:white;border:2px solid white;font-weight:600;padding:0.1rem 0.4rem;border-radius:5px">
           </form>
             <!-- <div>
                 <form action="" method="POST">
@@ -152,24 +169,23 @@ include '../private/Admin_product_management_BE.php';
             </div> -->
         </div>
         <div><?=$tablemsg?></div>
-        <div>
-            <table class="table table-striped" border=2px solid red>
+        <div class="prtable">
+            <table class="table table-striped table-dark" width=auto style="font-size:1rem;">
                 <thead>
-                    <tr class="table-head" width=100% style="background:red;color:white;">
-                        <th width=10% scope="col" style="border-right:1px solid black;">Name</th>
-                        <th width=10% scope="col" style="border-right:1px solid black;">Category</th>
-                        <th width=10% scope="col" style="border-right:1px solid black;">Description</th>
-                        <th width=10% scope="col" style="border-right:1px solid black;">Cost</th>
-                        <th width=10% scope="col" style="border-right:1px solid black;">Image</th>
-                        <th width=10% scope="col" style="border-right:1px solid black;">Quantity</th>
-                        <th width=15% scope="col" style="border-right:1px solid black;">Published On</th>
-                        <th width=15% scope="col" style="border-right:1px solid black;">Management</th>
+                <tr style="background:black;color:white;text-align:center;border-top:2px solid white;">
+                        <th style="background:black;color:white;text-align:center">Name</th>
+                        <th style="background:black;color:white;text-align:center">Category</th>
+                        <th style="background:black;color:white;text-align:center">Desc</th>
+                        <th style="background:black;color:white;text-align:center">Cost</th>
+                        <th style="background:black;color:white;text-align:center">Image</th>
+                        <th style="background:black;color:white;text-align:center">Qty</th>
+                        <th style="background:black;color:white;text-align:center">Date</th>
+                        <th style="background:black;color:white;text-align:center">Option</th>
                   </tr>
                 </thead>
 
 
                 <tbody>
-                    <tr>
                     <?php
                         $queryTable="SELECT * FROM products WHERE adminID=$adminID and productStatus=1 ORDER BY productPublished desc";
                         if(isset($_REQUEST['prdSearch'])){
@@ -198,7 +214,7 @@ include '../private/Admin_product_management_BE.php';
                         <td><?=$productCat?></td>
                         <td><textarea name="" id="" cols="20" rows="2"><?=$productDesc?></textarea></td>
                         
-                        <td>Rs.<?=$productCost?></td>
+                        <td>NPR.<?=$productCost?></td>
                         <td><a href='<?=$productImg?>' target="_blank"><img src='<?=$productImg?>'height='90px' width='70px'></a></td>
                         <td><?=$productQty?></td>
                         <td><?=$published?></td>
