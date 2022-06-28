@@ -156,6 +156,10 @@ if(isset($_REQUEST['submit'])){
     <title>Information || Bookship</title>
     <link rel="stylesheet" href="cart.css">
     <style>
+    
+        body{
+            background-color:white !important; 
+        }
         #buy{
             text-decoration:none;
             color:white;
@@ -174,15 +178,17 @@ if(isset($_REQUEST['submit'])){
         }
         td{
             padding:1rem 5rem;
+            background-color: #20214a;
+            color: white;
         }
         th{
-            background-color: black;
+            background-color: #fa5012;
             color:white;
             padding:0.5rem;
         }
         /* infor */
         #information{
-            border: 1px solid grey;
+            border: 2px solid #20214a;
             /* padding:1rem; */
             margin:2rem;
             margin: 2% 20%;
@@ -203,7 +209,7 @@ if(isset($_REQUEST['submit'])){
             padding: 3px;
             margin: 4px;
             font-size: 18px;
-            border:2px solid grey;
+            border:2px solid #20214a;
             border-radius: 5px;
         }
         label{
@@ -211,7 +217,7 @@ if(isset($_REQUEST['submit'])){
             font-size: 20px;
         }
         .infoHead{
-            background-color: black;
+            background-color: #fa5012;
             color:white;
             padding:2px 10px;
             margin: 0px;
@@ -219,20 +225,24 @@ if(isset($_REQUEST['submit'])){
         }
         .pay{
             display: flex;
-            border: 2px solid grey;
+            border: 2px solid #20214a;
             padding:5px;
             margin-right: 1rem;
         }
+        /* .combo{
+            background-color: #20214a;
+            color: white;
+        } */
     </style>
 </head>
 <body>
         <div align="center">
     <h1 align="center">ORDER SUMMARY</h1>
-        <table style="border:1px solid grey;margin:2rem;">
+        <table>
                                     <tr>
                                         <th>BOOK(QTY)</th>
                                         <th>PER BOOK</th>
-                                        <th >TOTAL PRICE</th>
+                                        <th>TOTAL PRICE</th>
                                     </tr>
             <?php
                 $cartQuery="SELECT * FROM cart WHERE userID=$userID";
@@ -263,9 +273,9 @@ if(isset($_REQUEST['submit'])){
                             <?php
                         }?>
                             <tr>
-                                <td style="border-top:1px solid grey;border-bottom:1px solid grey;"><b>TOTAL<?=" (".$qty2.")"?></b></td>
-                                <td style="border-top:1px solid grey;border-bottom:1px solid grey;"></td>
-                                <td style="border-top:1px solid grey;border-bottom:1px solid grey;"><b><?="NPR.".$qtytot?></b></td>
+                                <td ><b>TOTAL<?=" (".$qty2.")"?></b></td>
+                                <td ></td>
+                                <td ><b><?="NPR.".$qtytot?></b></td>
                             </tr>
                         </table>
                         </div>

@@ -29,7 +29,7 @@ include('../private/admin-header-nav.php');
             margin:0px;
         }
         body{
-            background-color: #cce6ff;
+            background:rgb(202, 205, 212);
         }
         .bodycover th,td{
             font-size: 1.17rem;
@@ -47,9 +47,7 @@ include('../private/admin-header-nav.php');
             margin:1rem;
         }
         .body1 table{
-            /* border: 4px solid blueviolet; */
-            /* border-radius:1rem; */
-            background-color: cornflowerblue;
+            background-color: #003399;
             margin:1rem;
             padding:0px;
         }
@@ -221,9 +219,10 @@ if(isset($_REQUEST['search'])){
 
 if(mysqli_num_rows($filter)>0){
 ?>
-<div align="center" style="margin-bottom:1rem">
+<div style="margin:1rem 1rem;color:#20214a">
 <h2><u>ORDERS RECEIVED</u></h2>
 </div>
+<hr>
 <div align="center" style="margin:1rem" class="all">
     <a href="shipmentdecision.php?oID=all&des=1&fil=<?=$fil?>" id="co" class="confirm" style="text-decoration:none;font-size:20px;">CONFIRM ALL ORDERS</a>
     <a href="shipmentdecision.php?oID=all&des=cancel&fil=<?=$fil?>" id="xo" class="cancel" style="text-decoration:none;font-size:20px;">CANCEL ALL ORDERS</a>

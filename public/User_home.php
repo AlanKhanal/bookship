@@ -37,7 +37,7 @@
     <div class="homecat">
             <div>Collection</div>
             <div class="view"><a href="collection.php" style="text-decoration:none;color:black">VIEW ALL</a></div>
-        </div>
+    </div>
         <div class="productsHome">  
     <?php
         $getQuery="SELECT * FROM products WHERE productStatus=1 and productQty>0 ORDER BY productPublished desc LIMIT 5";
@@ -55,8 +55,11 @@
                 $productImg=$getRow['productImg'];
                 $productAuthor=$getRow['productAuthor'];
                 $published=$getRow['productPublished'];
-                if(strlen($productName)>17){
-                    $productName=substr($productName, 0, 17)."...";
+                if(strlen($productName)>16){
+                    $productName=substr($productName, 0, 16)."...";
+                }
+                if(strlen($productAuthor)>17){
+                    $productAuthor=substr($productAuthor, 0, 17)."...";
                 }
                 ?>
                 <!-- Data fetched -->
@@ -102,9 +105,13 @@
                         $productImg=$getRow['productImg'];
                         $productAuthor=$getRow['productAuthor'];
                         $published=$getRow['productPublished'];
-                        if(strlen($productName)>17){
-                            $productName=substr($productName, 0, 17)."...";
+                        if(strlen($productName)>16){
+                            $productName=substr($productName, 0, 16)."...";
                         }
+                        if(strlen($productAuthor)>17){
+                            $productAuthor=substr($productAuthor, 0, 17)."...";
+                        }
+
                         ?>
                         <!-- Data fetched -->
                         <div class="content">
@@ -149,8 +156,8 @@
                 //         $productImg=$getRow['productImg'];
                 //         $productAuthor=$getRow['productAuthor'];
                 //         $published=$getRow['productPublished'];
-                //         if(strlen($productName)>17){
-                //             $productName=substr($productName, 0, 17)."...";
+                //         if(strlen($productName)>16){
+                //             $productName=substr($productName, 0, 16)."...";
                 //         }
                         ?>
                         <!-- Data fetched -->

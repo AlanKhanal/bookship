@@ -17,10 +17,16 @@ session_start();
         $row = mysqli_fetch_assoc($run);
         $adminID=$row['adminID'];
     }
-
-    $query022="UPDATE categories SET categoryStatus=1 WHERE categoryID=$categoryIDedit";
+    $fetch=mysqli_query($conn,"SELECT * FROM categories where categoryID='$categoryIDedit'");
+    $row=mysqli_fetch_assoc($fetch);
+    echo $catname=$row['categoryName'];
+    $query022="UPDATE categories SET categoryStatus=1 WHERE categoryID='$categoryIDedit'";
     $run022=mysqli_query($conn,$query022);
     if($run022){
-        header('location:../private/Admin_moreManagementCat.php');
+        $unhideProduct="UPDATE products SET productStatus=1 WHERE productCategory='$catname'";
+        $rununhide=mysqli_query($conn,$unhideProduct);
+        if($rununhide){
+            header('location:../public/Admin_category_management.php');
+        }
     }
 ?>

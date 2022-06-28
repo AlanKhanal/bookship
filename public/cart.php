@@ -1,7 +1,7 @@
 <?php
 $msg="";
     include ('../private/dbconnect.php');
-    session_start();
+session_start();
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
     {
         header("location: user_login.php");
@@ -14,6 +14,9 @@ $msg="";
         $userID=$row['userID'];
         $userName=$row['userName'];
         $userEmail=$row['email'];
+    }
+    else{
+        header("location:User_login.php?set=0");
     }
 
     if(isset($_REQUEST['id'])){
@@ -105,28 +108,35 @@ $msg="";
     <title>Cart || Bookship</title>
     <link rel="stylesheet" href="cart.css">
     <style>
+        
+        .cont{
+            color:coral;
+        }
+        .cont:hover{
+            color: #fa5012;
+        }
         #buy{
             text-decoration:none;
-            color:yellow;
+            color:white;
             font-size:24px;
             font-weight:bold;
-            border:2px solid black;
+            border:2px solid coral;
             border-radius:5px;
             padding:2px 20px;
-            background-color:#0066ff;
+            background-color:#fa5012;
         }
         #buy:hover{
-            transform: scaleX(1.1);
-            background-color:blue;
+            transform: scaleX(1.07);
+            background-color:orangered;
         }
     </style>
 </head>
 <body>
     <div style="padding-left:140px">
-        <a href="User_home.php" style="text-decoration:dashed;color:brown;font-size:24px;font-weight:bold"><p><< <u>Continue shopping</u></p></a>
+        <a href="User_home.php" style="text-decoration:dashed;color:#fa5012;font-size:24px;font-weight:bold"><p class="cont">::<u>CONTINUE SHOPPING</u>::</p></a>
     </div>
     <div class="allBody"> 
-        <div class="cartbody" style="border:3px solid red;width:600px;padding:5px;border-radius:10px;background-color:#ff3333">
+        <div class="cartbody" style="border:3px solid coral;width:600px;padding:5px;background-color:#20214a">
         <div class="myCartHead" style="color:white;font-weight:bold;display:flex;justify-content:space-between">
             <div>MY CART</div>
             <div>PRICE</div>
@@ -181,9 +191,9 @@ $msg="";
                                                             ?>
                                                             <input type="number" value=<?=$qty?> name="qty" id="qty" onclick="touch()" min=1 max=<?=$orgqty?> style="width:40px;text-align:center;border:1px solid black;padding:1px;border-radius:5px;font-weight:700;"></li>
                                                             <div id="manage">
-                                                            <input type="submit" name="manage" value="SAVE" style="background-color:#1a1aff;border:1px solid #1a1aff;padding:2px;color:white;" >
-                                                                <a href="wishlist.php?id=<?=$Row32['productID']?>" style="text-decoration:none;background-color:#E75480;border:1px solid #E75480;padding:1px;color:white;font-size:14px">ADD TO WISHLST</a>
-                                                                <input type="submit" name="remove" value="DELETE" style="background-color:grey;border:1px solid grey;padding:2px;color:white">
+                                                            <input type="submit" name="manage" value="SAVE" style="background-color:orange;border:1px solid orange;padding:2px;color:white;border-radius:2px" >
+                                                                <a href="wishlist.php?id=<?=$Row32['productID']?>" style="text-decoration:none;background-color:#E75480;border:1px solid #E75480;padding:1px;color:white;font-size:14px;border-radius:2px">ADD TO WISHLIST</a>
+                                                                <input type="submit" name="remove" value="DELETE" style="background-color:grey;border:1px solid grey;padding:2px;color:white;border-radius:2px">
                                                             </div>
                                                             
                                                         </form>
@@ -209,7 +219,7 @@ $msg="";
             ?>
             <div style="display:flex;justify-content:space-between">
             
-                <div style="font-weight:bold">TOTAL</div>
+                <div style="font-style:italic;color:white">TOTAL</div>
                 <div><?php
                     $query32 = "SELECT * FROM cart WHERE userID=$userID";
                     $query_run = mysqli_query($conn,$query32);
@@ -217,13 +227,13 @@ $msg="";
                     while ($num = mysqli_fetch_assoc ($query_run)) {
                         $qty += $num['totPrice'];
                     }
-                    echo "<b>NPR.".$qty."</b>";
+                    echo "<i style='color:white;'>NPR.".$qty."</i>";
                 ?></div>
             </div>
         </div>
     </div>
     <div style="display:flex;justify-content:space-around;text-align:center;margin:0rem 7rem">
-        <a href="buyerInfo.php?uqid=62961f8211776-23cart<?=$userID?>"><button id="buy">Proceed to buy</button></a>
+        <a href="buyerInfo.php?uqid=62961f8211776-23cart<?=$userID?>"><button id="buy">PROCEED</button></a>
         <!-- <form action="https://uat.esewa.com.np/epay/main" method="POST">
             <input value="<?=$qty?>" name="tAmt" type="hidden">
             <input value="<?=$qty?>" name="amt" type="hidden">

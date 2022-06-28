@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <style>
+<style>
             *{
                 margin:0px;
                 padding: 0px;    
@@ -9,10 +9,21 @@
 
             }
     nav{
-    background: cornflowerblue;
+    background: #003399;
     width: auto;
 }
+.logo{
+  animation: color-change 25s infinite;
+}
 
+@keyframes color-change {
+  0% { color: white; }
+  20% { color: lightcoral; }
+  40% { color: burlywood; }
+  60% { color: lightgreen; }
+  80% { color: rgb(249, 249, 83); }
+  100% { color: white; }
+}
 nav::after{
     content: '';
     clear: both;
@@ -39,12 +50,12 @@ nav ul{
 nav ul li{
     /* float: left; */
     display: inline-block;
-    background: cornflowerblue;
+    background: #003399;
     margin: 0 5px;
 }
 
 nav ul li a{
-    color: black;
+    color: white;
     text-decoration: none;
     line-height: 70px;
     font-size: 18px;
@@ -52,7 +63,7 @@ nav ul li a{
 }
 
 nav ul li a:hover{
-    color: white;
+    color: cornflowerblue;
     /* border-radius: 5px;
     box-shadow: 0 0 5px royalblue,
                 0 0 5px purple; */
@@ -88,7 +99,7 @@ nav ul ul li{
 </head>
 <body>
 <nav>
-        <div class="logo">Bookship</div>
+        <div class="logo">BOOKSHIP</div>
             <ul>
                 <li><a href="../public/Admin_home.php">Home</a></li>
 
@@ -105,7 +116,7 @@ nav ul ul li{
                         <ul>
                             <li><a href="../private/Admin_changePassword.php">Change Password</a></li>
                             <li><a href="../private/Admin_changeInfo.php">Edit Profile</a></li>
-                            <li><a href="">Dump ></a>
+                            <li><a href="">Dump:</a>
                                 <ul>
                                 <li><a href="../private/Admin_moreManagement.php">Product</a></li>
                                 <li><a href="../private/Admin_moreManagementCat.php">Category</a></li>

@@ -12,13 +12,16 @@
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
         }
+        body{
+            background:rgb(202, 205, 212);
+        }
         .bottom{
             margin-top: 2rem;
-            background-color: #ff3333;
+            background-color: #20214a;
             display: flex;
             justify-content: space-around;
-            border-top:5px solid red;
-            border-bottom:5px solid red;
+            border-top:5px solid #fa5012;
+            border-bottom:5px solid #fa5012;
             padding-bottom: 1rem;
 
         }
@@ -37,8 +40,9 @@
             padding-left: 3px;
         }
         .boldy{
+            color: #fa5012;
             font-size:20px;
-            color: black;
+            /* color: black; */
             font-weight: 700;
             padding-top:1rem;
         }
@@ -55,7 +59,7 @@
                 $adminID=$row['adminID'];
                 $adminName=$row['adminName'];
                 $adminEmail=$row['email'];
-                $companyName=$row['companyName'];
+                $companyName=strtoupper($row['companyName']);
                 $companyAddress=$row['companyAddress'];
             }
             ?>

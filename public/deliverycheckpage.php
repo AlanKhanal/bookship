@@ -29,7 +29,7 @@ include('../private/admin-header-nav.php');
             margin:0px;
         }
         body{
-            background:rgb(202, 205, 212);
+            background-color: rgb(202, 205, 212);
         }
         .bodycover th,td{
             font-size: 1.17rem;
@@ -114,6 +114,13 @@ include('../private/admin-header-nav.php');
         }
         .choice a{
             text-decoration: none;
+            color:white;
+            border: 2px solid coral;
+            background-color: #fa5012;
+            padding:1px 5px
+        }
+        .choice a:hover{
+            transform: scaleX(1.05);
         }
         .confirm{
             border: 2px solid green;
@@ -221,10 +228,9 @@ if(isset($_REQUEST['search'])){
 
 if(mysqli_num_rows($filter)>0){
 ?>
-<div style="margin:1rem 1rem;color:#20214a">
+<div align="center" style="margin-bottom:1rem">
 <h2><u>ORDERS SHIPPED</u></h2>
 </div>
-<hr>
 <!-- <div align="center" style="margin:1rem" class="all">
     <a href="shipmentdecision.php?oID=all&des=1&fil=<?=$fil?>" id="co" class="confirm" style="text-decoration:none;font-size:20px;">CONFIRM ALL ORDERS</a>
     <a href="shipmentdecision.php?oID=all&des=cancel&fil=<?=$fil?>" id="xo" class="cancel" style="text-decoration:none;font-size:20px;">CANCEL ALL ORDERS</a>
@@ -360,7 +366,7 @@ if(mysqli_num_rows($filter)>0){
         </th>
                 <th colspan="3" style="border-top:2px solid #ffff66;">
                 <div class="choice" >
-                    <i style="color:#ffff66">SHIPPED</i>
+                    <a href="../private/delivered.php?id=<?=$uID?>">Delivered[<?=$uID?>]</a>
                 </div>
                 </th>
             </tr>

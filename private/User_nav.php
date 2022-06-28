@@ -19,8 +19,8 @@
             margin:0px;
         }
         .w-body{
-            background-color: #ff3333;
-            width: 100%;
+            background-color: #20214a;
+            width: auto;
         }
         .w-body input,.w-body{
             font-size: 22px;
@@ -34,18 +34,22 @@
         .nav1-1{
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
         }
         .nav1-1 div{
-           padding: 5px 0px;
+           padding-left: 30px;
+           padding-bottom: 5px;
+           padding-top:5px;
+           /* padding-right:1rem; */
         }
         .nav1 div{
-            padding:5px 0px;
+            padding:5px 5px;
         }
         .home:hover{
             /* padding:5px 5px; */
             transform: scaleX(1.1);
         }
-        .cat:hover{
+        .cat #catHead:hover{
             /* padding:5px 5px; */
             transform: scaleX(1.1);
         }
@@ -56,6 +60,7 @@
         .search{
             padding:0px;
             margin:0px;
+            /* font-size: 12px; */
         }
         .w-body a{
             text-decoration:none;
@@ -66,16 +71,32 @@
         }
         .catList2{
             font-size: 22px;
-        }
-        .nav1-1 div{
-            padding-right:1rem;
-        }
+        }   
         .icon img:hover{
             /* width:37px; */
             transform: scaleX(1.1);
         }
         .home,.cat{
             padding-left:1rem;
+        }
+        .logo a h3{
+            text-decoration: underline dotted;
+        }
+        .src{
+            padding: 0px;
+            background-color: #fa5012;
+            border: 2px solid coral;
+            color:white;
+
+            border-left: white;
+            border-top-right-radius:5px;
+            border-bottom-right-radius: 5px;
+        }
+        .inpsrc{
+            border: 2px solid coral;
+            border-top-left-radius:5px;
+            border-bottom-left-radius: 5px;
+            border-right: none;
         }
     </style>
 </head>
@@ -88,7 +109,7 @@
                         // COMPANY_NAME
                         $adminName=mysqli_query($conn,"SELECT companyName FROM admins");
                         while($getComp=mysqli_fetch_array($adminName)){
-                            $new=$getComp['companyName'];
+                            $new=strtoupper($getComp['companyName']);
                             ?><u><b><h3><?=$new?></h3></b></u>
                             <?php
                         }
@@ -115,7 +136,7 @@
                         }
                     </script>
                     <div id="catList" style="font-size:18px;position:fixed;" hidden>
-                    <table style="border:1px solid red;padding:4px 8px;background-color:#ff3333;color:white">
+                    <table style="border:1px solid red;padding:4px 8px;background-color:#20214a;color:white">
                         <?php
                         $getCats="SELECT * FROM categories WHERE categoryStatus=1";
                         $runGet29=mysqli_query($conn,$getCats);
@@ -141,8 +162,8 @@
             <div class="search">
                 <form action="" method="POST">
                     <div style="display:flex;justify-content:flex-start;">
-                        <input type="text" placeholder="Search" name="searchTxt">
-                    <input type="submit" name="searchSub" value="SEARCH">
+                        <input type="text" placeholder="Search" name="searchTxt" class="inpsrc">
+                    <input type="submit" name="searchSub" value="Go" class="src">
                 </div>
             </div>
             <div class="nav1-1">

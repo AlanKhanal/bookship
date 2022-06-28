@@ -19,14 +19,24 @@ session_start();
 
 if(isset($_REQUEST['deleteID'])){
     $deleteID=$_REQUEST['deleteID'];
+        $fetch=mysqli_query($conn,"SELECT * FROM categories WhERE categoryID=$deleteID");
+        while($row=mysqli_fetch_assoc($fetch)){
+        $catName=$row['categoryName'];
 
-    $hideCcat="DELETE FROM categories WHERE categoryID=$deleteID;";
-    $runhide=mysqli_query($conn,$hideCcat);
-    if($runhide){
-        header('location:http://localhost:8081/bookship/public/Admin_category_management.php');
-    }
-    else{
-        echo $deleteID;
-    }
+        $hideCcat2="DELETE FROM products WHERE productCategory='$catName';";
+        $runhide2=mysqli_query($conn,$hideCcat2);    
+            if($runhide2){
+                $hideCcat="DELETE FROM categories WHERE categoryID=$deleteID;";
+                $runhide=mysqli_query($conn,$hideCcat);
+
+                if($runhide){
+                    header('location:http://localhost:8081/bookship/public/Admin_category_management.php');
+                }
+            }
+            else{
+                echo $deleteID;
+            }
+        
+        }
 }
 ?>

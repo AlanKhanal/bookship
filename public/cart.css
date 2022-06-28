@@ -4,6 +4,9 @@
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 }
+body{
+    background:rgb(202, 205, 212);
+}
 /* /* .qty{
     padding:5px;
 } */
@@ -16,6 +19,7 @@
 }
 .myCartHead{
     padding:3px;
+    font-size: 1.7rem;
 }
 .boldHR{
     border-top:1px solid white;

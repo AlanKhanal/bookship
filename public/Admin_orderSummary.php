@@ -4,24 +4,29 @@ include ('../private/dbconnect.php');
 session_start();
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
 {
-    header("location: user_login.php");
+    header("location: Admin_login.php");
 }
-$user = $_SESSION['userName'];
-$query = "SELECT * FROM users WHERE userName='$user'";
+$admin = $_SESSION['adminName'];
+$query = "SELECT * FROM admins WHERE adminName='$admin'";
 $run=mysqli_query($conn,$query);
 if (mysqli_num_rows($run) > 0){
     $row = mysqli_fetch_assoc($run);
-    $userID=$row['userID'];
-    $userName=$row['userName'];
-    $userEmail=$row['email'];
+    $adminID=$row['adminID'];
+    $adminName=$row['adminName'];
+    $adminEmail=$row['email'];
+    $companyName=$row['companyName'];
+    $companyAddress=$row['companyAddress'];
 }
-include('../private/User_nav.php');
+include('../private/admin-header-nav.php');
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Bookship | My Orders</title>
     <style>
+        body{
+            background:rgb(202, 205, 212);
+        }
         #orderBody{
             display: flex;
             justify-content: space-around;
@@ -73,9 +78,10 @@ include('../private/User_nav.php');
    <?php
  if(isset($_REQUEST['id'])){
     $orID=$_REQUEST['id'];
-    $data=mysqli_query($conn,"SELECT * FROM orders WHERE uniqueorder='$orID' and userID=$userID");
+    $data=mysqli_query($conn,"SELECT * FROM orders WHERE uniqueorder='$orID'");
     if(mysqli_num_rows($data)>0){
         while($rowda=mysqli_fetch_assoc($data)){
+            $userID=$rowda['userID'];
             $name=$rowda['customer'];
             $productID=$rowda['productID'];
             $qty=$rowda['qty'];
@@ -89,6 +95,11 @@ include('../private/User_nav.php');
             $postC=$rowda['postC'];
             $method=$rowda['method'];
             $time=$rowda['orderedTime'];
+
+            $findUser=mysqli_query($conn,"SELECT * FROM users WHERE userID=$userID");
+            while($user=mysqli_fetch_assoc($findUser)){
+                $userNamebyid=$user['userName'];
+            }
                 }
             }     
         }
@@ -105,6 +116,10 @@ if(isset($_REQUEST['st'])){
             </tr>
             <tr>
                 <th colspan="2"><b>PERSONAL DETAILS</b></td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td><?=$userNamebyid?></td>
             </tr>
             <tr>
                 <td>Order Id</td>
@@ -179,7 +194,7 @@ if(isset($_REQUEST['st'])){
                         $ID=$getPlaced2['productID'];
                         $prdqty=$getPlaced2['productQty'];
                         if($prdqty>=1){
-                            $link="http://localhost:8081/bookship/public/User_ProductView.php?product=$ID";
+                            $link="http://localhost:8081/bookship/private/Admin_product_edit.php?productID=$ID";
                         }
                         else{
                             $link="";
@@ -219,25 +234,8 @@ if(isset($_REQUEST['st'])){
             $qty += $num['totPrice'];
         }
         ?>
-        <div style="display:flex;justify-content:space-between;margin:1rem;">
-        <?php
-        $cancel=mysqli_query($conn,"SELECT * FROM orders WHERE uniqueorder='$orID' and orderStatus=0 GROUP BY uniqueorder");
-        $numchq=mysqli_num_rows($cancel);
-        if($numchq==1){
-            ?>
-            <a href="dltPlaced.php?orID=<?=$orID?>" class="cancellation" style="text-decoration:none;border:3px solid coral;background-color:#fa5012;padding:0.3rem;border-radius:5px;color:darkred"><b>CANCEL ORDER</b></a>
-        <?php
-        }
-        else{
-            ?><a style="text-decoration:none;border:1px solid lightblue;background-color:lightblue;padding:0.3rem;color:white;border-radius:5px"><b>CANCEL ORDER</b></a>
-        <?php
-        }
-        ?>
             <i><b>Total Price: NPR.<?=$qty?></b></i>
         </div>
     </div>
         </div>
     </div>
-    <?php
-include('User_footer.php');
-?>

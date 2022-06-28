@@ -70,6 +70,9 @@ include('../private/User_nav.php');
                 elseif($st==1){
                     $head="SHIPPED ORDER";
                 }
+                elseif($st=3){
+                    $head="DELIVERED ORDER";
+                }
                 else{
                     $head="<p style='color:red'>ERROR FOUND</>";
                 }

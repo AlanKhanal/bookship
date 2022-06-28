@@ -78,6 +78,8 @@ if(isset($_REQUEST['oID']) && isset($_REQUEST['des'])){
     elseif($id!='' && $id!='all' && $desc=='cancel'){
         $query=mysqli_query($conn,"UPDATE orders SET orderStatus=2 WHERE orderStatus=0 and uniqueorder='$id'");
      }
-    
+    if($query){
+      header("location:Admin_shippedbooks.php");
+    }
 }
 ?>

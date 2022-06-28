@@ -15,6 +15,9 @@ $msg="";
         $userName=$row['userName'];
         $userEmail=$row['email'];
     }
+    else{
+        header("location:User_login.php?set=0");
+    }
 
     if(isset($_REQUEST['id'])){
         $id2=$_REQUEST['id'];
@@ -79,12 +82,27 @@ $msg="";
 <head>
     <title>Wishlist || Bookship</title>
     <link rel="stylesheet" href="cart.css">
+    <style>
+        .cont{
+            text-decoration: none;
+            color:coral;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .cont:hover{
+            color: #ff751a;
+        }
+    </style>
 </head>
 <body>
+<div style="display:flex;justify-content:space-between;margin:1rem 3rem;">
+        <a href="User_home.php" class="cont"><p>:: CONTINUE SHOPPING  ::</p></a>
+        <a href="cart.php" class="cont"><p>:: CHECK CART ::</p></a>
+    </div>
     <div class="allBody"> 
-        <div class="cartbody" style="border:3px solid red;width:600px;padding:5px;border-radius:10px;background-color:#E75480">
+        <div class="cartbody" style="border:3px solid lightcoral;width:600px;padding:5px;background-color:#E75480">
         <div class="myCartHead" style="color:white;font-weight:bold;display:flex;justify-content:space-between">
-            <div>Wishlist</div>
+            <div>WISHLIST</div>
             <div>PRICE</div>
         </div>
         
@@ -152,7 +170,7 @@ $msg="";
             ?>
             <div style="display:flex;justify-content:space-between">
             
-                <div style="font-weight:bold">TOTAL</div>
+                <div style="color:white"><i>TOTAL</i></div>
                 <div><?php
                     $query32 = "SELECT * FROM wishlist WHERE userID=$userID";
                     $query_run = mysqli_query($conn,$query32);
@@ -160,15 +178,10 @@ $msg="";
                     while ($num = mysqli_fetch_assoc ($query_run)) {
                         $qty += $num['totPrice'];
                     }
-                    echo "<b>NPR.".$qty."</b>";
+                    echo "<i style='color:white'>NPR.".$qty."</i>";
                 ?></div>
             </div>
         </div>
-    </div>
-    
-    <div style="display:flex;justify-content:space-between;margin:1rem 3rem;">
-        <a href="User_home.php" style="text-decoration:dashed;color:brown;font-size:24px;font-weight:bold"><p><< <u>CONTINUE SHOPPING</u></p></a>
-        <a href="cart.php" style="text-decoration:dashed;color:brown;font-size:24px;font-weight:bold"><p><u>CHECK CART</u> >></p></a>
     </div>
 </body>
 </html>

@@ -45,14 +45,17 @@ $msg="";
     <title>Purchase | on delivery</title>
     <style>
         td{
-            padding:3px 6px;
+            padding:0.5rem 1rem;
             font-size: 18px;
+            border: 2px solid white;
         }
         .heads{
-            /* font-weight: 600; */
+            color: white;
+            font-weight: 600;
             padding: 2px 10px;
         }
         .detail{
+            color: white;
             font-weight: 700;
             padding: 2px 10px;
         }
@@ -63,12 +66,13 @@ $msg="";
             margin:1rem;
         }
         h2{
-            padding:0rem 1rem;
+            padding:0.5rem 1rem;
+            color: red;
         }
         .cancel{
             padding:0.4rem 1rem;
             margin:0.2rem;
-            border-radius:5px;
+            /* border-radius:5px; */
             color: white;
             border:1px solid red;
             background-color: red;
@@ -77,18 +81,22 @@ $msg="";
         .conf{
             padding:0.4rem 1rem;
             margin:0.2rem;
-            border-radius:5px;
+            /* border-radius:5px; */
             color: white;
-            border:1px solid #00cc00;
-            background-color: #00cc00;
+            border:1px solid #20914a;
+            background-color: #20214a;
             font-weight: 600;
+        }
+        table{
+            border: 2px solid #20214a;
+            background-color: #20214a;
         }
     </style>
 </head>
 <body>
     <div align="center" class="purchase">
         <h2>CONFIRM PURCHASE</h2>
-            <table align="center" border="2px solid grey">
+            <table align="center">
                 <tr>
                     <td class="heads">Receiver name</td>
                     <td class="detail"><?=$custname?></td>
@@ -165,7 +173,7 @@ $msg="";
                 <input value="<?=$randomID?>" name="pid" type="hidden">
                 <input value="http://localhost:8081/bookship/public/purchaseConfirm.php?trsid=<?=$uqid?>" type="hidden" name="su">
                 <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
-                <input value="Submit" type="submit" class="conf">
+                <input value="PURCHASE" type="submit" class="conf">
             </form>
             <a href="buyerInfo.php">Incorrect detail?</a>
     </div>

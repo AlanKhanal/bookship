@@ -79,13 +79,19 @@ if(isset($_REQUEST['updatePass'])){
             margin:0px;
             padding:0px;
         }
+        body{
+            background:rgb(202, 205, 212);
+        }
         .menu{
             margin-top: 2rem;
             right:0;
             height:355px;
             width:240px;
-            background-color: #ff3333;
-            border-right: 3px solid red;
+            background-color: #20214a;
+            border: 3px solid #fa5012 ;
+            border-left: none;
+            border-top-right-radius: 1rem;
+            border-bottom-right-radius: 1rem;
         }
         .menu div{
             padding-left: 1rem;
@@ -96,9 +102,11 @@ if(isset($_REQUEST['updatePass'])){
             color:white;
             font-size: 20px;
         }
-        .username{
-            font-size: 30px;
+        .username .username2{
+            text-decoration: none;
+            font-size: 2rem;
             font-weight: 600;
+            color: white;
         }
 
         #orders{
@@ -107,15 +115,37 @@ if(isset($_REQUEST['updatePass'])){
             margin-right:5rem;
         }
         .infoCh{
-            margin: 1rem;
+            margin: 0.5rem;
         }
         .infoInput{
-            padding:1rem;
+            padding:0.5rem;
             font-size: 20px;
+        }
+        .infoInput .input{
+            padding:1px 10px;
+            font-size: 18px;
+            border:2px solid coral;
+            background-color: #fa5012;
+            color: white;
+        }
+        .infoInput .input:hover{
+            transform: scaleY(1.1);
+            /* font-weight: 5; */
         }
         .infoInput input{
             padding:1px 10px;
             font-size: 18px;
+            border:2px solid #20214a;
+            background-color: white;
+            border-radius: 5px;
+        }
+        .usermail{
+            color: grey;
+        }
+        .headings{
+            color:black;
+            font-weight: 600;
+            font-size: 30px;
         }
     </style>
 </head>
@@ -124,7 +154,7 @@ if(isset($_REQUEST['updatePass'])){
         <!-- menu -->
         <div class="menu">
             <div class="username">
-                <?=strtoupper($userName)?>
+                <a href="profile.php" class="username2"><?=strtoupper($userName)?></a>
             </div>
             <div class="usermail">
                 <?=$userEmail?>
@@ -148,15 +178,16 @@ if(isset($_REQUEST['updatePass'])){
         </div>
         <!-- setting -->
         <div id="orders">
-            <div class="username">
-                Account settings
+            <div class="headings">
+                Change Password
             </div>
+            <hr>
             <div class="infoCh">
                     <table>
                         <form action="" method="POST">
-                            <th>
+                            <!-- <th>
                                 <td><div class="infoInput"><b>CHANGE PASSWORD</b></div></td>
-                            </th>
+                            </th> -->
                             <tr>
                                 <td><div class="infoInput">Current password:</div></td>
                                 <td><div class="infoInput"><input type="password" name="pass"></div></td>
@@ -172,7 +203,7 @@ if(isset($_REQUEST['updatePass'])){
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="infoInput"><input type="submit" Value="CHANGE PASSWORD" name="updatePass"></div>
+                                    <div class="infoInput"><input type="submit" Value="CHANGE PASSWORD" name="updatePass" class="input"></div>
                                 </td>
                             </tr>
                             </form>

@@ -45,8 +45,8 @@
                 $productImg=$getRow['productImg'];
                 $productAuthor=$getRow['productAuthor'];
                 $published=$getRow['productPublished'];
-                if(strlen($productName)>17){
-                    $productName=substr($productName, 0, 17)."...";
+                if(strlen($productName)>16){
+                    $productName=substr($productName, 0, 16)."...";
                 }
 ?> 
                 <!-- Data fetched -->

@@ -21,12 +21,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Home | Bookship</title>
-    <style>
-        body{
-            background:rgb(202, 205, 212);
-        }
-        .subParts,.parts{
+    <title>Analyze | Bookship</title>
+</head>
+<style>
+    .subParts,.parts{
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
@@ -50,57 +48,20 @@
         hr{
             margin:0rem 1rem;
         }
-    </style>
-</head>
-<body>
-    <div class="parts">
-        <div class="subParts">
-           <a href="Admin_category_management.php"><div class="heads" id="cat">MANAGE CATEGORY</div></a>
-            <a href="Admin_product_management.php"><div class="heads" id="prod">MANAGE PRODUCT</div></a>
-        </div>
-        <div class="subParts">
-            <a href="Admin_placedbooks.php"><div class="heads" id="placed">ORDERS RECEIVED</div></a>
-            <a href="Admin_shippedbooks.php"><div class="heads" id="ship">ORDERS SHIPPED</div></a>
-            <!-- <a href="Admin_placedbooks.php"><div class="heads" id="placed">ORDERS CANCELLED</div></a>
-            <a href="Admin_shippedbooks.php"><div class="heads" id="ship">ORDERS DELIVERED</div></a> -->
-        </div>
-    </div>
-    <hr>
-    <!-- SALES -->
-    <style>
-        .miniRow{
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+    body{
+            background:rgb(202, 205, 212);
+        }
+    .miniRow{
+            margin: 1rem;
         }
         .dashboard{
             display: block;
         }
         .row1,.row2{
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+            /* display: flex;
+            justify-content: space-around; */
+            /* flex-wrap: wrap; */
             margin: 2rem 0rem;
-        }
-        .delivered table{
-            background-color: #00cc00;
-            border: 3px solid #00cc00;
-            border-radius: 0.3rem;
-        }
-        .empty table{
-            background-color:#ff3333;
-            border: 3px solid #ff3333;
-            border-radius: 0.3rem;
-        }
-        .sales table{
-            background-color: #20214a;
-            border: 3px solid #20214a;
-            border-radius: 0.3rem;
-        }
-        .users table{
-            border: 3px solid purple;
-            background-color: purple;
-            border-radius: 0.3rem;
         }
         .delivered table th{
             background-color: #00cc00;
@@ -163,8 +124,11 @@
         .sales table .main:hover{
             transform: scale(1.1);
         }
-        .empty,.delivered,.users,.sales{
-            margin: 0.5rem 0.5rem;
+        .empty table,.delivered table,.users table,.sales table{
+            /* display: flex;
+            justify-content: space-between; */
+            margin: 1rem 1rem;
+            /* text-align: center; */
         }
         .dashboard{
             margin: 0.5rem 0.5rem;
@@ -180,11 +144,27 @@
             padding-top: 10px;
             text-align: center;
         }
-    </style>
-    <div><h1></h1></div>
-    <div class="dashboard">
-        <div class="row1">
-        <div class="empty">
+</style>
+<body>
+<div class="parts">
+        <div class="subParts">
+           <a href="Admin_category_management.php"><div class="heads" id="cat">MANAGE CATEGORY</div></a>
+            <a href="Admin_product_management.php"><div class="heads" id="prod">MANAGE PRODUCT</div></a>
+        </div>
+        <div class="subParts">
+            <a href="Admin_placedbooks.php"><div class="heads" id="placed">ORDERS RECEIVED</div></a>
+            <a href="Admin_shippedbooks.php"><div class="heads" id="ship">ORDERS SHIPPED</div></a>
+            <!-- <a href="Admin_placedbooks.php"><div class="heads" id="placed">ORDERS CANCELLED</div></a>
+            <a href="Admin_shippedbooks.php"><div class="heads" id="ship">ORDERS DELIVERED</div></a> -->
+        </div>
+    </div>  
+    <hr>
+<?php
+if(isset($_REQUEST['num'])){
+    $num=$_REQUEST['num'];
+    if($num==1){
+        ?>
+                <div class="empty">
                 <div class="miniRow">
                     <div class="head" style="color:#ff3333">OUT OF STOCK</div>
                 </div>
@@ -196,7 +176,7 @@
                         <th>OPTION</th>
                     </tr>
                         <?php
-                            $get=mysqli_query($conn,"SELECT * FROM products WHERE productQty=0 LIMIT 6");
+                            $get=mysqli_query($conn,"SELECT * FROM products WHERE productQty=0 ");
                             $numget=mysqli_num_rows($get);
                             if($numget>0){
                                 while($fetch=mysqli_fetch_assoc($get)){
@@ -220,10 +200,13 @@
                         ?>
                     
                 </table>
-                <div class="view"><a href="admin_dashView.php?num=1">VIEW ALL</a></div>
-            </div>
+</div>
+        <?php
 
-            <div class="users">
+    }
+    elseif($num==2){
+?>
+                <div class="users">
                 <div class="miniRow">
                     <div class="head" style="color:purple">SIGNED</div>
                 </div>
@@ -235,7 +218,7 @@
                         </tr>
                     
                     <?php
-                        $placed2=mysqli_query($conn,"SELECT * FROM users WHERE userStatus=1 and emailVerification=1 ORDER BY joinedDate desc LIMIT 6");
+                        $placed2=mysqli_query($conn,"SELECT * FROM users WHERE userStatus=1 and emailVerification=1 ORDER BY joinedDate desc ");
                         if($rowplaced2=mysqli_num_rows($placed2)>0){
                             while($get=mysqli_fetch_assoc($placed2)){
                                 $id=$get['userID'];
@@ -252,12 +235,12 @@
                         }
                     ?>
                     </table>
-                    <div class="view"><a href="admin_dashView.php?num=2">VIEW ALL</a></div>
-            </div>
-        </div>
-        <hr>
-        <div class="row2">
-            <div class="delivered">
+                </div>
+<?php
+    }
+    elseif($num==3){
+?>
+                <div class="delivered">
                 <div class="miniRow">
                     <div class="head" style="color:#00cc00">DELIVERED</div>
                 </div>
@@ -270,7 +253,7 @@
                     </tr>
                 
                 <?php
-                    $placed=mysqli_query($conn,"SELECT uniqueorder,sum(qty) AS qty,method,customer FROM orders WHERE orderStatus=3 GROUP BY uniqueorder ORDER BY orderedTime desc LIMIT 6");
+                    $placed=mysqli_query($conn,"SELECT uniqueorder,sum(qty) AS qty,method,customer FROM orders WHERE orderStatus=3 GROUP BY uniqueorder ORDER BY orderedTime desc ");
                     if($rowplaced=mysqli_num_rows($placed)>0){
                         while($getPlaced=mysqli_fetch_assoc($placed)){
                             $name2=$getPlaced['customer'];
@@ -289,42 +272,50 @@
                     }
                 ?>
                 </table>
-                <div class="view"><a href="admin_dashView.php?num=3">VIEW ALL</a></div>
-            </div>
-            <div class="sales">
-                <div class="miniRow">
-                    <div class="head" style="color:#20214a">SALES</div>
                 </div>
-                <table>
-                    <tr>
-                        <th>BOOK NAME</th>
-                        <th>QUANTITY SOLD</th>
-                        <th>PER PIECE</th>
-                        <th>TOTAL</th>
-                    </tr>
-                <?php
-                    $fet=mysqli_query($conn,"SELECT orders.productID,products.productName,sum(orders.qty) AS qty,products.productCost,orders.totPrice,products.productCategory,products.productImg
-                    FROM orders 
-                    INNER JOIN products
-                    ON orders.productID = products.productID WHERE orderStatus=3 GROUP BY orders.productID LIMIT 6");
-
-                    while($info=mysqli_fetch_assoc($fet)){
-                        $spid=$info['productID'];
-                        $spname=$info['productName'];
-                        $spqty=$info['qty'];
-                        $spcost=$info['productCost'];
-                        $sptot=$info['qty']*$info['productCost'];
-                        echo "<tr><td class='main'><a href='http://localhost:8081/bookship/private/Admin_product_edit.php?productID=$spid'>$spname</a></td><td>$spqty</td><td>$spcost</td><td>$sptot</td></tr>";
-
-                    }
-                ?>
-                </table>
-                <div class="view"><a href="admin_dashView.php?num=4">VIEW ALL</a></div>
-            </div>
-            <?php
-
-            ?>
+<?php
+    }
+    elseif($num==4){
+?>
+    <div class="sales">
+        <div class="miniRow">
+            <div class="head" style="color:#20214a">SALES</div>
         </div>
+        <table>
+            <tr>
+                <th>BOOK NAME</th>
+                <th>QUANTITY SOLD</th>
+                <th>PER PIECE</th>
+                <th>TOTAL</th>
+            </tr>
+        <?php
+            $fet=mysqli_query($conn,"SELECT orders.productID,products.productName,sum(orders.qty) AS qty,products.productCost,orders.totPrice,products.productCategory,products.productImg
+            FROM orders 
+            INNER JOIN products
+            ON orders.productID = products.productID WHERE orderStatus=3 GROUP BY orders.productID ");
+
+            while($info=mysqli_fetch_assoc($fet)){
+                $spid=$info['productID'];
+                $spname=$info['productName'];
+                $spqty=$info['qty'];
+                $spcost=$info['productCost'];
+                $sptot=$info['qty']*$info['productCost'];
+                echo "<tr><td class='main'><a href='.php?<?=$spid?>'>$spname</a></td><td>$spqty</td><td>$spcost</td><td>$sptot</td></tr>";
+
+            }
+        ?>
+        </table>
     </div>
+<?php
+    }
+    else{
+        header("location:Admin_home.php");
+    }
+}
+else{
+    header("location:Admin_home.php");
+}
+?> 
+<hr>
 </body>
 </html>
